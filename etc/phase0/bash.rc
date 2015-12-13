@@ -1,0 +1,8 @@
+set +h
+set -e
+set -u
+
+source $WORKDIR/etc/phase$PHASE/phase.properties
+
+set +e
+set +u

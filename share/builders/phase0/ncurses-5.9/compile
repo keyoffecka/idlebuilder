@@ -1,0 +1,2 @@
+make $COMPILE_OPTS -C include
+make $COMPILE_OPTS -C progs tic
