@@ -4,7 +4,9 @@ set -u
 
 source $WORKDIR/etc/phase$PHASE/phase.properties
 
-export PS1='\u:\w [phase$PHASE/$PHASE_NAME]: '
+suffix=""
+[ -n "$PHASE_NAME" ] && suffix="/$PHASE_NAME"
+export PS1='\u:\w [$WORKDIR:phase$PHASE$suffix]: '
 
 set +e
 set +u
