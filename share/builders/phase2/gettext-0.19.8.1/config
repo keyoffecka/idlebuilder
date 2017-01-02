@@ -1,0 +1,2 @@
+cd $PKG_SRC_DIR/gettext-tools
+eval "$CFG_ENV $PKG_SRC_DIR/gettext-tools/configure $CFG"

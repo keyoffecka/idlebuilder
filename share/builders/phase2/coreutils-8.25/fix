@@ -1,0 +1,4 @@
+cat > config.cache << EOF
+fu_cv_sys_stat_statfs2_bsize=yes
+gl_cv_func_working_mkstemp=yes
+EOF

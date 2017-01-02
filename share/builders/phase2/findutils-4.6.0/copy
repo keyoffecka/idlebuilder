@@ -1,0 +1,2 @@
+make install $COPY_OPTS
+rm -fvr $DST_DIR/$PKG_LONG_NAME/$PREFIX/var
