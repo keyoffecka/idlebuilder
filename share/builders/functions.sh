@@ -7,7 +7,10 @@ function _ask() {
 }
 
 function _exec() {
-  local file_path="$WORKDIR/share/builders/phase$PHASE/$PKG_LONG_NAME/$1"
+  local file_path="$WORKDIR/share/builders/phase$PHASE/$PKG_FULL_NAME/$1"
+  if [ ! -r "$file_path" ] ; then
+    file_path="$WORKDIR/share/builders/phase$PHASE/$PKG_LONG_NAME/$1"
+  fi
   if [ -r "$file_path" ] ; then
     echo "#Custom $1 script"
     cat $file_path
@@ -211,7 +214,7 @@ function fix() {
   if [ -n "$patch_file_path" ] ; then
     unxz -c "$patch_file_path" | patch -Np1
   fi
-
+  
   if [ -n "$fix_script" ] ; then 
     eval "$fix_script" 
   fi

@@ -1,0 +1,11 @@
+make $COPY_OPTS install
+make $COPY_OPTS localedata/install-locales
+
+rm -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/include/rpcsvc/*.x
+
+mkdir -p $DST_DIR/$PKG_LONG_NAME/etc
+mkdir -p $DST_DIR/$PKG_LONG_NAME/var/cache/nscd
+
+cp -v $PKG_SRC_DIR/nscd/nscd.conf $DST_DIR/$PKG_LONG_NAME/etc/nscd.conf
+cp -v $WORKDIR/share/files/$PKG_FULL_NAME/nsswitch.conf $DST_DIR/$PKG_LONG_NAME/etc
+cp -v $WORKDIR/share/files/$PKG_FULL_NAME/ld.so.conf $DST_DIR/$PKG_LONG_NAME/etc

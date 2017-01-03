@@ -19,8 +19,8 @@ isMount ${IDLE_ROOT}/proc || mount -t proc proc ${IDLE_ROOT}/proc
 isMount ${IDLE_ROOT}/sys || mount -t sysfs sysfs ${IDLE_ROOT}/sys
 isMount ${IDLE_ROOT}/var/run || mount -t tmpfs tmpfs ${IDLE_ROOT}/var/run
 
-isMount ${IDLE_ROOT}/var/cache/idle || mount --bind /storage/cache-idle-1.0.1/idle ${IDLE_ROOT}/var/cache/idle
-isMount ${IDLE_ROOT}/usr/src || mount --bind /storage/cache-idle-1.0.1/src ${IDLE_ROOT}/usr/src
+#isMount ${IDLE_ROOT}/var/cache/idle || mount --bind /storage/cache-idle-1.0.1/idle ${IDLE_ROOT}/var/cache/idle
+#isMount ${IDLE_ROOT}/usr/src || mount --bind /storage/cache-idle-1.0.1/src ${IDLE_ROOT}/usr/src
 
 install -d -o 0 -g 0 -m 1777 ${IDLE_ROOT}/var/run/shm
 

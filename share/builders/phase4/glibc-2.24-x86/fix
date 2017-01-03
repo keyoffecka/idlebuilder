@@ -1,3 +1,1 @@
-_linker=$(readelf -l $TOOLS_DIR/bin/bash | sed -n 's@.*interpret.*'$TOOLS_DIR'\(.*\)]$@\1@p')
-sed -i "s|libs -o|libs -L/usr/lib32 -Wl,-dynamic-linker=${_linker} -o|" scripts/test-installation.pl
-unset _linker
+sed -i "s|libs -o|libs -L/usr/lib$LIB_SUFFIX -Wl,-dynamic-linker=/lib32/ld-linux.so.2 -o|" scripts/test-installation.pl

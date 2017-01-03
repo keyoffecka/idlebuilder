@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Should be executed mannualy once before starting the phase 3
+
 set +h
 set -e
 set -u
