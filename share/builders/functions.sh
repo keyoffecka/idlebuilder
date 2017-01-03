@@ -98,6 +98,7 @@ function initialize() {
   local old_COMPILE_OPTS=${COMPILE_OPTS:-"_none_"}
   local old_COPY_OPTS=${COPY_OPTS:-"_none_"}
   local old_PKG_BUILD_DIR=${PKG_BUILD_DIR:-"_none_"}
+  local old_PKG_CFG_DIR=${PKG_CFG_DIR:-"_none_"}
   
   _read_props "init.properties"
   
@@ -106,17 +107,22 @@ function initialize() {
   [ "$old_COMPILE_OPTS" != "_none_" ] && COMPILE_OPTS="$old_COMPILE_OPTS"
   [ "$old_COPY_OPTS" != "_none_" ] && COPY_OPTS="$old_COPY_OPTS"
   [ "$old_PKG_BUILD_DIR" != "_none_" ] && PKG_BUILD_DIR="$old_PKG_BUILD_DIR"
-
+  [ "$old_PKG_CFG_DIR" != "_none_" ] && PKG_CFG_DIR="$old_PKG_CFG_DIR"
+  
   PKG_SRC_DIR=${PKG_SRC_DIR:-$SRC_DIR/$PKG_LONG_NAME}
   PKG_BUILD_DIR=${PKG_BUILD_DIR:-$PKG_SRC_DIR}
-  
+  PKG_CFG_DIR=${PKG_CFG_DIR:-$PKG_SRC_DIR}
+
   PREFIX=${PREFIX:-/usr}
 
   COMPILE_OPTS=${COMPILE_OPTS:-"-j8"}
   COPY_OPTS=${COPY_OPTS:-"DESTDIR=$DST_DIR/$PKG_LONG_NAME"}
   
-  CFG=${CFG:-"--prefix=$PREFIX --libdir=$PREFIX/lib$LIB_SUFFIX"}
-  CFG_ENV=${CFG_ENV:-}
+  DEFAULT_CFG=${DEFAULT_CFG:-"--prefix=$PREFIX --libdir=$PREFIX/lib$LIB_SUFFIX"}
+  CFG=${CFG:-$DEFAULT_CFG}
+  
+  DEFAULT_CFG_ENV=${DEFAULT_CFG_ENV:-""}
+  CFG_ENV=${CFG_ENV:-$DEFAULT_CFG_ENV}
 
   _read_props "post.properties"
   
@@ -129,6 +135,7 @@ function initialize() {
   [ "$old_COMPILE_OPTS" != "_none_" ] && COMPILE_OPTS="$old_COMPILE_OPTS"
   [ "$old_COPY_OPTS" != "_none_" ] && COPY_OPTS="$old_COPY_OPTS"
   [ "$old_PKG_BUILD_DIR" != "_none_" ] && PKG_BUILD_DIR="$old_PKG_BUILD_DIR"
+  [ "$old_PKG_CFG_DIR" != "_none_" ] && PKG_CFG_DIR="$old_PKG_CFG_DIR"
 
   fix_script=$(_exec fix)
   config_script=$(_exec config)
@@ -147,6 +154,7 @@ function dump() {
   echo "PKG_FILE_NAME        : $PKG_FILE_NAME"
   echo "PKG_BUILD_DIR        : $PKG_BUILD_DIR"
   echo "PKG_SRC_DIR          : $PKG_SRC_DIR"
+  echo "PKG_CFG_DIR          : $PKG_CFG_DIR"
   echo "PREFIX               : $PREFIX"
   echo "LIB_SUFFIX           : $LIB_SUFFIX"
   echo "IDLE_HOST            : $IDLE_HOST"
@@ -157,7 +165,7 @@ function dump() {
   echo "CFG_ENV              : $CFG_ENV"
   echo
   _dump_script "$fix_script"
-  _dump_script "$config_script" "config" "$CFG_ENV $PKG_SRC_DIR/configure $CFG"
+  _dump_script "$config_script" "config" "$CFG_ENV $PKG_CFG_DIR/configure $CFG"
   _dump_script "$prepare_script"
   _dump_script "$compile_script" "compile" "make $COMPILE_OPTS"
   _dump_script "$copy_script" "copy" "make install $COPY_OPTS"
@@ -231,7 +239,7 @@ function config() {
   if [ -n "$config_script" ] ; then 
     eval "$config_script" 
   else
-    eval "$CFG_ENV $PKG_SRC_DIR/configure $CFG"
+    eval "$CFG_ENV $PKG_CFG_DIR/configure $CFG"
   fi
 }
 
@@ -270,6 +278,7 @@ function copy() {
 function clean() {
   echo "STEP: clean"
 
+  mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
   [ -d "$DST_DIR/$PKG_LONG_NAME/$PREFIX/man" ] && mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/man $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
 
   rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/{,share}/{info,doc}
@@ -281,6 +290,37 @@ function clean() {
 
   if [ -d "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share" ] ; then
     [ -z "$(command ls -1 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share)" ] && rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
+  fi
+  
+  if [ -d $DST_DIR/$PKG_LONG_NAME/lib ] ; then
+    mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
+    mv $DST_DIR/$PKG_LONG_NAME/lib/* $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
+    rm -fr $DST_DIR/$PKG_LONG_NAME/lib
+  fi
+  if [ -d $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib ] ; then
+    mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
+    mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/* $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
+    rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib
+  fi
+  if [ -d $DST_DIR/$PKG_LONG_NAME/lib32 ] ; then
+    mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib32
+    mv $DST_DIR/$PKG_LONG_NAME/lib32/* $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib32
+    rm -fr $DST_DIR/$PKG_LONG_NAME/lib32
+  fi
+  if [ -d $DST_DIR/$PKG_LONG_NAME/lib64 ] ; then
+    mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib64
+    mv $DST_DIR/$PKG_LONG_NAME/lib64/* $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib64
+    rm -fr $DST_DIR/$PKG_LONG_NAME/lib64
+  fi
+  if [ -d $DST_DIR/$PKG_LONG_NAME/$PREFIX/sbin ] ; then
+    mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+    mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/sbin/* $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+    rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/sbin
+  fi
+  if [ -d $DST_DIR/$PKG_LONG_NAME/sbin ] ; then
+    mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+    mv $DST_DIR/$PKG_LONG_NAME/sbin/* $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+    rm -fr $DST_DIR/$PKG_LONG_NAME/sbin
   fi
   
   find $DST_DIR/$PKG_LONG_NAME/$PREFIX/{,usr/}{bin,sbin,lib,lib32,lib64} -type f -exec strip --strip-debug '{}' ';' 2>/dev/null || true

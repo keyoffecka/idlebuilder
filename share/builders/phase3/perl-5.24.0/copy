@@ -1,0 +1,6 @@
+make install $COPY_OPTS
+
+mkdir -p $DST_DIR/$PKG_LONG_NAME/usr/bin
+ln -sfv $PREFIX/bin/perl $DST_DIR/$PKG_LONG_NAME/usr/bin
+
+rm $DST_DIR/$PKG_LONG_NAME/*.0

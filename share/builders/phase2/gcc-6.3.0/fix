@@ -2,7 +2,8 @@ for file in \
   $(find gcc/config -name linux64.h -o -name linux.h -o -name sysv4.h)
 do
   cp -uv $file{,.orig}
-  sed -e 's@/lib\(64\)\?\(32\)\?/ld@'$TOOLS_DIR'&@g' \
+  sed -e 's@/lib/ld-linux@'$TOOLS_DIR'/lib32/ld-linux@g' \
+      -e 's@/lib64/ld-linux@'$TOOLS_DIR'/lib64/ld-linux@g' \
       -e 's@/usr@'$TOOLS_DIR'@g' $file.orig > $file
   echo '
 #undef STANDARD_STARTFILE_PREFIX_1

@@ -1,2 +1,2 @@
 mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
-cp -v $PKG_SRC_DIR/gettext-tools/src/msgfmt $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+cp -v $PKG_BUILD_DIR/src/msgfmt $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin

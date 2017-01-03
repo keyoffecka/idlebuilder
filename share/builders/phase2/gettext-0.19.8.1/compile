@@ -1,5 +1,3 @@
-cd $PKG_SRC_DIR/gettext-tools
-
 make $COMPILE_OPTS -C gnulib-lib
 make $COMPILE_OPTS -C intl pluralx.c
 make $COMPILE_OPTS -C src msgfmt

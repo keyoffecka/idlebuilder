@@ -1,0 +1,4 @@
+make $COPY_OPTS install
+
+touch $DST_DIR/$PKG_LONG_NAME/etc/ld.so.conf
+rm -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/include/rpcsvc/*.x
