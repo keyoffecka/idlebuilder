@@ -1,0 +1,7 @@
+make install $COPY_OPTS
+
+lib_suffix=$LIB_SUFFIX
+[ "$ARCH" == "32" ] && lib_suffix=""
+
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gdb/auto-load/usr/lib$lib_suffix
+mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libisl*gdb.py $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gdb/auto-load/usr/lib$lib_suffix

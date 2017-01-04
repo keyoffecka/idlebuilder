@@ -1,0 +1,4 @@
+make $COPY_OPTS install
+
+mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+cp -v $WORKDIR/share/files/$PKG_LONG_NAME/lex $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
