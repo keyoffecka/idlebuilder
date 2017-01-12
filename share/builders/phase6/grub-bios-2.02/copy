@@ -1,0 +1,5 @@
+make $COPY_OPTS bashcompletiondir="$PREFIX/share/bash-completion/completions" install
+
+rm -vf "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/grub/i386-pc"/*.module || true
+rm -vf "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/grub/i386-pc"/*.image || true
+rm -vf "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/grub/i386-pc"/{kernel.exec,gdb_grub,gmodule.pl} || true

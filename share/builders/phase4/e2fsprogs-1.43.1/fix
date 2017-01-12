@@ -1,0 +1,1 @@
+sed -i '/libdir.*=.*\/lib/s@/lib@/lib'$LIB_SUFFIX'@g' configure

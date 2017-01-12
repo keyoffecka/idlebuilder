@@ -1,0 +1,9 @@
+make $COPY_OPTS bashcompletiondir="$PREFIX/share/bash-completion/completions" install
+
+rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
+find $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin ! -name 'grub-emu*' -type f -exec rm -f {} +
+rm -fr $DST_DIR/$PKG_LONG_NAME/$ROOT/etc
+
+rm -vf "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/grub/$EMU_ARCH-emu"/*.module || true
+rm -vf "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/grub/$EMU_ARCH-emu"/*.image || true
+rm -vf "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/grub/$EMU_ARCH-emu"/{kernel.exec,gdb_grub,gmodule.pl} || true

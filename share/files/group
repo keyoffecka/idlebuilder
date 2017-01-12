@@ -20,7 +20,6 @@ mail:x:30:
 wheel:x:39:
 nogroup:x:65533:
 console:x:17:
-messagebus:x:27:
 news:x:31:news
 users:x:1001:
 nobody:x:65533:

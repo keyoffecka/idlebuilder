@@ -1,0 +1,2 @@
+make $COMPILE_OPTS -C src clobber
+make $COMPILE_OPTS -C src CC="gcc ${BUILD}"

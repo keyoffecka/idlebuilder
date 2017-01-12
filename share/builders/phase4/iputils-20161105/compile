@@ -1,0 +1,1 @@
+make $COMPILE_OPTS CC="gcc $BUILD" USE_CAP=no TARGETS="ping tracepath traceroute6 clockdiff rdisc"

@@ -1,0 +1,4 @@
+sed 's|/usr/share/fonts/dejavu|/usr/share/fonts/dejavu /usr/share/fonts/TTF|g' -i "configure"
+sed 's| ro | rw |g' -i "util/grub.d/10_linux.in"
+sed 's|GNU/Linux|Linux|' -i "util/grub.d/10_linux.in"
+sed -e 's#en@cyrillic en@greek##g' -i "po/LINGUAS"

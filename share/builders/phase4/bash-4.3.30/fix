@@ -1,0 +1,1 @@
+sed -i "/ac_cv_rl_libdir/s@/lib@&$LIB_SUFFIX@" configure

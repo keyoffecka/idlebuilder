@@ -1,0 +1,4 @@
+cp -v $WORKDIR/share/files/$PKG_LONG_NAME/* $PKG_SRC_DIR
+sed -i -e 's:ln -s -f $(PREFIX)/bin/:ln -s :' Makefile
+sed -i 's@X)/man@X)/share/man@g' ./Makefile
+sed -i 's@/lib\(/\| \|$\)@/lib'$LIB_SUFFIX'\1@g' Makefile

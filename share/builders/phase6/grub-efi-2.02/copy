@@ -1,0 +1,9 @@
+make $COPY_OPTS bashcompletiondir="$PREFIX/share/bash-completion/completions" install
+
+rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
+rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+rm -fr $DST_DIR/$PKG_LONG_NAME/$ROOT/etc
+
+rm -vf "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/grub/$EFI_ARCH-efi"/*.module || true
+rm -vf "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/grub/$EFI_ARCH-efi"/*.image || true
+rm -vf "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/grub/$EFI_ARCH-efi"/{kernel.exec,gdb_grub,gmodule.pl} || true
