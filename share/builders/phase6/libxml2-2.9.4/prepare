@@ -1,0 +1,6 @@
+sed -r -e 's,-L'$PREFIX'/lib64 -lz,-L'$PREFIX'/lib'$LIB_SUFFIX' -lz,' -i Makefile
+sed -r -e 's,-L'$PREFIX'/lib64 -lz,-L'$PREFIX'/lib'$LIB_SUFFIX' -lz,' -i xstc/Makefile
+sed -r -e 's,-L'$PREFIX'/lib64 -lz,-L'$PREFIX'/lib'$LIB_SUFFIX' -lz,' -i libxml-2.0.pc
+sed -r -e 's,-L'$PREFIX'/lib64 -lz,-L'$PREFIX'/lib'$LIB_SUFFIX' -lz,' -i include/Makefile 
+sed -r -e 's,-L'$PREFIX'/lib64 -lz,-L'$PREFIX'/lib'$LIB_SUFFIX' -lz,' -i include/libxml/Makefile
+sed -r -e 's,-L'$PREFIX'/lib64,-L'$PREFIX'/lib'$LIB_SUFFIX',' -i xml2-config

@@ -24,14 +24,14 @@ isMount ${IDLE_ROOT}/usr/src || mount --bind /storage/cache-idle-1.0.1/src ${IDL
 
 install -d -o 0 -g 0 -m 1777 ${IDLE_ROOT}/var/run/shm
 
-
 $TOOLS_DIR/bin/chroot $IDLE_ROOT $ROOT/bin/bash --rcfile $WORKDIR/etc/phase$PHASE/chroot-bash.rc || true
 
-#umount $IDLE_ROOT/usr/src
-#umount $IDLE_ROOT/var/cache/idle
+umount $IDLE_ROOT/usr/src
+umount $IDLE_ROOT/var/cache/idle
 
 umount $IDLE_ROOT/dev/pts
 umount $IDLE_ROOT/dev
 umount $IDLE_ROOT/var/run
 umount $IDLE_ROOT/sys
 umount $IDLE_ROOT/proc
+

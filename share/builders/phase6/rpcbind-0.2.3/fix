@@ -1,0 +1,1 @@
+sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c

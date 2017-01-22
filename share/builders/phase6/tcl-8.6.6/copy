@@ -1,0 +1,10 @@
+cd $PKG_BUILD_DIR
+
+sed -e "s#$PKG_SRC_DIR/unix#$PREFIX/lib#" \
+    -e "s#$PKG_SRC_DIR#$PREFIX/include#"  \
+    -i tclConfig.sh              
+
+make $COPY_OPTS install
+make $COPY_OPTS install-private-headers
+ln -v -sf tclsh8.6 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/tclsh
+chmod -v 755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libtcl8.6.so

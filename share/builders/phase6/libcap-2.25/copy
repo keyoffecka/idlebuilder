@@ -1,0 +1,6 @@
+make $COPY_OPTS RAISE_SETFCAP=no prefix=$PREFIX LIBDIR=$PREFIX/lib$LIB_SUFFIX lib=lib$LIB_SUFFIX install
+chmod -v 755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libcap.so
+
+install -d -m755 $DST_DIR/$PKG_LONG_NAME/etc/security
+install -v -m755 pam_cap/pam_cap.so $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/security
+install -v -m644 pam_cap/capability.conf $DST_DIR/$PKG_LONG_NAME/etc/security

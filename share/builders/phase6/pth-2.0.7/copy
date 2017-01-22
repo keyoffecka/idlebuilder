@@ -1,0 +1,4 @@
+make $COPY_OPTS install
+
+mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/pth-config $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/pth-config-$ARCH
+ln -sv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/pth-config

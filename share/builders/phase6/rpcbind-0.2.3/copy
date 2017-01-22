@@ -1,0 +1,4 @@
+make $COPY_OPTS install
+
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/etc/rc.d/init.d
+cp -v $WORKDIR/share/files/$PKG_LONG_NAME/rpcbind $DST_DIR/$PKG_LONG_NAME/etc/rc.d/init.d

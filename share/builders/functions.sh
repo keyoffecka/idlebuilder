@@ -30,12 +30,9 @@ function _dump_script() {
   fi
 }
 
-function _read_props() {
-  local file_path="$WORKDIR/share/builders/phase$PHASE/$PKG_FULL_NAME/$1"
-  if [ ! -r "$file_path" ] ; then
-    file_path="$WORKDIR/share/builders/phase$PHASE/$PKG_LONG_NAME/$1"
-  fi
-  
+function _read_file_props {
+  local file_path="$1"
+
   if [ -r "$file_path" ] ; then
     local line=""
     local lines=""
@@ -46,24 +43,14 @@ function _read_props() {
   fi
 }
 
-# Calculated vars:
-# ARCH, may be 32 or 64, based on the build script name: build.sh gives 64, build-32.sh goves 32
-# PKG_ARCH, may be x86 or x86_64, based on the build script name
-# IDLE_TARGET, based on the build script name: build.sh gives the value of $IDLE_TARGET64, build-32.sh gives the value of IDLE_TARGET32
-# PKG_NAME, PKG_VERSION, PKG_LONG_NAME, PKG_FULL_NAME, PKG_FILE_NAME are based on source package name.
-#
-# Phase global vars:
-# ROOT, SRC_DIR, DST_DIR, REPO_DIR, IDLE_TARGET32, IDLE_TARGET64, IDLE_HOST - must be set, shouldn't be empty.
-# PHASE_NAME, must be set and may be empty, if so, then the binary package will have no pahse name suffix in the full filename.
-# LIB_SUFFIX, may be unset or empty, if unset then will be set to $ARCH, if empty will be kept empty.
-# 
-# init.properties may override calculated and global phase variables and may be calculated based on the global phase variables and other calculated variables.
-# 
-# PKG_SRC_DIR, PKG_BUILD_DIR, PREFIX, COMPILE_OPTS, COPY_OPTS, CFG, CFG_ENV - may be defined as global phase variables or in init.properties,
-# if not set, then default values be used.
-#
-# post.properties may be used to override any variable and to set its value based on other variable values.
-# It is recommended to use post.properties if possible.
+function _read_props() {
+  local file_path="$WORKDIR/share/builders/phase$PHASE/$PKG_FULL_NAME/$1"
+  if [ ! -r "$file_path" ] ; then
+    file_path="$WORKDIR/share/builders/phase$PHASE/$PKG_LONG_NAME/$1"
+  fi
+
+  _read_file_props $file_path
+}
 
 function initialize() {
   local script_file_name="$1"
@@ -87,8 +74,8 @@ function initialize() {
   BUILD=$BUILD32
   [ "$ARCH" == "64" ] && BUILD=$BUILD64
 
-  PKG_NAME=$(basename "$src_file_path" | sed -r 's,(.+)-[0-9.]+\.tar\..+,\1,')
-  PKG_VERSION=$(basename "$src_file_path" | sed -r 's,.+-([0-9.]+)\.tar\..+,\1,')
+  PKG_NAME=$(basename "$src_file_path" | sed -r 's,(.+)-[0-9].*\.tar\..+,\1,')
+  PKG_VERSION=$(basename "$src_file_path" | sed -r 's,.+-([0-9].*)\.tar\..+,\1,')
   PKG_LONG_NAME=$PKG_NAME-$PKG_VERSION
   PKG_FULL_NAME=$PKG_LONG_NAME-$PKG_ARCH
 
@@ -96,50 +83,87 @@ function initialize() {
   [ -n "$PHASE_NAME" ] && pkg_phase_postfix=-$PHASE_NAME
   PKG_FILE_NAME=$PKG_FULL_NAME$pkg_phase_postfix.tar.xz
   
+  PREFIX=${PREFIX:-/usr}
+
+  DROP_MAN=${DROP_MAN:-"false"}
+  DROP_LOCALE=${DROP_LOCALE:-"false"}
+  
+  _read_file_props "$WORKDIR/etc/phase$PHASE/phase-$ARCH.properties"
+
   local old_CFG=${CFG:-"_none_"}
   local old_CFG_ENV=${CFG_ENV:-"_none_"}
   local old_COMPILE_OPTS=${COMPILE_OPTS:-"_none_"}
   local old_COPY_OPTS=${COPY_OPTS:-"_none_"}
-  local old_PKG_BUILD_DIR=${PKG_BUILD_DIR:-"_none_"}
-  local old_PKG_CFG_DIR=${PKG_CFG_DIR:-"_none_"}
+  local old_PATCH_OPTS=${PATCH_OPTS:-"_none_"}
+  
+  COMPILE_OPTS=${COMPILE_OPTS:-"-j8"}
+  COPY_OPTS=${COPY_OPTS:-"DESTDIR=$DST_DIR/$PKG_LONG_NAME"}
+  PATCH_OPTS=${PATCH_OPTS:-"-Np1"}
+
+  #PKG_SRC_DIR       ->PKG_BUILD_DIR,PKG_CFG_DIR
+  #LIB_SUFFIX        ->DEFAULT_CFG,CFG
+  #PREFIX            ->DEFAULT_CFG,CFG
+  #DEFAULT_CFG       ->CFG
+  #DEFAULT_CXXFLAGS  ->DEFAULT_CFG_ENV,CFG_ENV
+  #DEFAULT_CFLAGS    ->DEFAULT_CFG_ENV,CFG_ENV
+  #DEFAULT_CFG_ENV   ->CFG_ENV
+  #PKG_CONFIG_PATH_64->PKG_CONFIG_PATH
+  #PKG_CONFIG_PATH_32->PKG_CONFIG_PATH
+  #CC_32             ->CC
+  #CC_64             ->CC
+  #CXX_32            ->CXX
+  #CXX_64            ->CXX
   
   _read_props "init.properties"
-  
+
   [ "$old_CFG" != "_none_" ] && CFG="$old_CFG"
   [ "$old_CFG_ENV" != "_none_" ] && CFG_ENV="$old_CFG_ENV"
   [ "$old_COMPILE_OPTS" != "_none_" ] && COMPILE_OPTS="$old_COMPILE_OPTS"
   [ "$old_COPY_OPTS" != "_none_" ] && COPY_OPTS="$old_COPY_OPTS"
-  [ "$old_PKG_BUILD_DIR" != "_none_" ] && PKG_BUILD_DIR="$old_PKG_BUILD_DIR"
-  [ "$old_PKG_CFG_DIR" != "_none_" ] && PKG_CFG_DIR="$old_PKG_CFG_DIR"
+  [ "$old_PATCH_OPTS" != "_none_" ] && PATCH_OPTS="$old_PATCH_OPTS"
   
   PKG_SRC_DIR=${PKG_SRC_DIR:-$SRC_DIR/$PKG_LONG_NAME}
   PKG_BUILD_DIR=${PKG_BUILD_DIR:-$PKG_SRC_DIR}
   PKG_CFG_DIR=${PKG_CFG_DIR:-$PKG_SRC_DIR}
 
-  PREFIX=${PREFIX:-/usr}
-
-  COMPILE_OPTS=${COMPILE_OPTS:-"-j8"}
-  COPY_OPTS=${COPY_OPTS:-"DESTDIR=$DST_DIR/$PKG_LONG_NAME"}
-  
   DEFAULT_CFG=${DEFAULT_CFG:-"--prefix=$PREFIX --libdir=$PREFIX/lib$LIB_SUFFIX"}
   CFG=${CFG:-$DEFAULT_CFG}
   
   DEFAULT_CFG_ENV=${DEFAULT_CFG_ENV:-"${DEFAULT_CXXFLAGS:+CXXFLAGS='$DEFAULT_CXXFLAGS'} ${DEFAULT_CFLAGS:+CFLAGS='$DEFAULT_CFLAGS'}"}
   CFG_ENV=${CFG_ENV:-$DEFAULT_CFG_ENV}
+  
+  if [ -z "${PKG_CONFIG_PATH:-}" ] ; then
+    if [ "$ARCH" == "64" -a -n "${PKG_CONFIG_PATH_64:-}" ] ; then
+      export PKG_CONFIG_PATH=$PKG_CONFIG_PATH_64
+    elif [ -n "${PKG_CONFIG_PATH_32:-}" ] ; then
+      export PKG_CONFIG_PATH=$PKG_CONFIG_PATH_32
+    fi
+  fi
+
+  if [ -z "${CC:-}" ] ; then
+    if [ "$ARCH" == "64" -a -n "${CC_64:-}" ] ; then
+      export CC=$CC_64
+    elif [ -n "${CC_32:-}" ] ; then
+      export CC=$CC_32
+    fi
+  fi
+
+  if [ -z "${CXX:-}" ] ; then
+    if [ "$ARCH" == "64" -a -n "${CXX_64:-}" ] ; then
+      export CXX=$CXX_64
+    elif [ -n "${CXX_32:-}" ] ; then
+      export CXX=$CXX_32
+    fi
+  fi
 
   _read_props "post.properties"
   
-  DROP_MAN=${DROP_MAN:-"false"}
-  DROP_LOCALE=${DROP_LOCALE:-"false"}
- 
-
   [ "$old_CFG" != "_none_" ] && CFG="$old_CFG"
   [ "$old_CFG_ENV" != "_none_" ] && CFG_ENV="$old_CFG_ENV"
   [ "$old_COMPILE_OPTS" != "_none_" ] && COMPILE_OPTS="$old_COMPILE_OPTS"
   [ "$old_COPY_OPTS" != "_none_" ] && COPY_OPTS="$old_COPY_OPTS"
-  [ "$old_PKG_BUILD_DIR" != "_none_" ] && PKG_BUILD_DIR="$old_PKG_BUILD_DIR"
-  [ "$old_PKG_CFG_DIR" != "_none_" ] && PKG_CFG_DIR="$old_PKG_CFG_DIR"
-
+  [ "$old_PATCH_OPTS" != "_none_" ] && PATCH_OPTS="$old_PATCH_OPTS"
+  
   unpack_script=$(_exec unpack)
   fix_script=$(_exec fix)
   config_script=$(_exec config)
@@ -154,6 +178,7 @@ function exp() {
 
 function dump() {
   echo "ARCH                 : $ARCH"
+  echo "USE_ARCH             : ${USE_ARCH:-}"
   echo "PKG_ARCH             : $PKG_ARCH"
   echo "PKG_NAME             : $PKG_NAME"
   echo "PKG_VERSION          : $PKG_VERSION"
@@ -171,6 +196,9 @@ function dump() {
   echo "COPY_OPTS            : $COPY_OPTS"
   echo "CFG                  : $CFG"
   echo "CFG_ENV              : $CFG_ENV"
+  echo "CC                   : ${CC:-}"
+  echo "CXX                  : ${CXX:-}"
+  echo "PKG_CONFIG_PATH      : ${PKG_CONFIG_PATH:-}"
   echo
   _dump_script "$unpack_script"
   _dump_script "$fix_script"
@@ -183,7 +211,7 @@ function dump() {
 function aide {
   echo "STEP: aide"
 
-  $PKG_SRC_DIR/configure --help
+  $PKG_CFG_DIR/configure --help
 }
 
 function unpack() {
@@ -197,7 +225,7 @@ function unpack() {
   fi
 }
 
-# Patch file name may inlcude phase name, arch name or non of them:
+# Patch file name may inlcude phase name, arch name or none of them:
 #   package-version-x86_64-crosstools.pacthes.xz
 #   package-version-x86_64.patches.xz
 #   package-version.patches.xz
@@ -222,7 +250,7 @@ function fix() {
     [ -r "$patch_file_path" ] || patch_file_path=""
   fi
   if [ -n "$patch_file_path" ] ; then
-    unxz -c "$patch_file_path" | patch -Np1
+    unxz -c "$patch_file_path" | patch $PATCH_OPTS
   fi
   
   if [ -n "$fix_script" ] ; then 
@@ -257,10 +285,10 @@ function config() {
 }
 
 function prepare() {
-  echo "STEP: prepare"
-
   cd $PKG_SRC_DIR
   if [ -n "$prepare_script" ] ; then 
+    echo "STEP: prepare"
+
     eval "$prepare_script" 
   fi
 }
@@ -294,7 +322,7 @@ function clean() {
   mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
   [ -d "$DST_DIR/$PKG_LONG_NAME/$PREFIX/man" ] && mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/man $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
 
-  rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/{,share}/{info,doc}
+  rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/{,share}/{info,doc,gtk-doc}
   
   [ "$DROP_MAN" == "true" ] && rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man
   [ "$DROP_LOCALE" == "true" ] && rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/locale
@@ -360,6 +388,20 @@ function clean() {
   fi
 
   find $DST_DIR/$PKG_LONG_NAME/$PREFIX/{,usr/}{bin,sbin,lib,lib32,lib64} -type f -exec strip --strip-debug '{}' ';' 2>/dev/null || true
+  
+  if [ -n "${WRAP:-}" ] ; then
+    for f in $WRAP ; do
+      local _fullfilename="$DST_DIR/$PKG_LONG_NAME/$f"
+      local _filedirname="$(dirname $_fullfilename)"
+      local _filename="$(basename $_fullfilename)"
+      
+      local _name="$(echo $_filename | sed -r -e 's,([^.]+)(\..*)?,\1,')"
+      local _postfix="$(echo $_filename | sed -r -e 's,([^.]+)(\..*)?,\2,')"
+    
+      mv -v $_fullfilename "${_filedirname}/${_name}-$ARCH$_postfix"
+      ln -sfv multiarch_wrapper $_fullfilename
+    done
+  fi
 }
 
 function package() {

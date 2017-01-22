@@ -1,0 +1,3 @@
+make $COPY_OPTS install
+
+chmod -v 4755 $DST_DIR/$PKG_LONG_NAME/sbin/unix_chkpwd

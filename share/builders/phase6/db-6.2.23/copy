@@ -1,0 +1,2 @@
+make $COPY_OPTS install
+rm -fr $DST_DIR/$PKG_LONG_NAME/usr/docs

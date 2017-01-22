@@ -1,0 +1,1 @@
+patch -Np0 < "$REPO_DIR/$PKG_LONG_NAME.patches"
