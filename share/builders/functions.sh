@@ -21,12 +21,6 @@ function _dump_script() {
   if [ -n "$1" ] ; then
     echo "$1"
     echo 
-  else
-    if [ -n "${2:-}" ] ; then
-      echo "Default $2 script"
-      echo $3
-      echo 
-    fi
   fi
 }
 
@@ -52,15 +46,31 @@ function _read_props() {
   _read_file_props $file_path
 }
 
+function _clean_build_dir_and_cd() {
+  echo "$PKG_BUILD_DIR $PKG_SRC_DIR"
+  if [ -d "$PKG_BUILD_DIR" -a -d "$PKG_SRC_DIR" ] ; then
+    cd $PKG_BUILD_DIR
+    local b=$PWD
+    
+    cd $PKG_SRC_DIR
+    local s=$PWD
+    
+    if [[ "$s" != "$b"* ]] ; then
+      if [[ "$b" != "$s"* ]] ; then  
+        rm -frv $PKG_BUILD_DIR
+      fi
+    fi
+  fi
+  
+  mkdir -p $PKG_BUILD_DIR
+  cd $PKG_BUILD_DIR
+}
+
 function initialize() {
-  local script_file_name="$1"
-  local src_file_path="$2"
+  local src_file_path="$1"
 
   echo "STEP: initialize"
   
-  ARCH=$(echo "$script_file_name" | sed -r 's,build[^-]*(-(.+))?\.sh,\2,')
-  ARCH=${ARCH:-"64"}
-
   PKG_ARCH=x86
   [ "$ARCH" == "64" ] && PKG_ARCH="x86_64" 
   
@@ -88,14 +98,15 @@ function initialize() {
   DROP_MAN=${DROP_MAN:-"false"}
   DROP_LOCALE=${DROP_LOCALE:-"false"}
   
-  _read_file_props "$WORKDIR/etc/phase$PHASE/phase-$ARCH.properties"
-
+  local old_CMAKE_CFG=${CMAKE_CFG:-"_none_"}
   local old_CFG=${CFG:-"_none_"}
   local old_CFG_ENV=${CFG_ENV:-"_none_"}
   local old_COMPILE_OPTS=${COMPILE_OPTS:-"_none_"}
   local old_COPY_OPTS=${COPY_OPTS:-"_none_"}
   local old_PATCH_OPTS=${PATCH_OPTS:-"_none_"}
   
+  _read_file_props "$WORKDIR/etc/phase$PHASE/phase$PHASE.properties"
+
   COMPILE_OPTS=${COMPILE_OPTS:-"-j8"}
   COPY_OPTS=${COPY_OPTS:-"DESTDIR=$DST_DIR/$PKG_LONG_NAME"}
   PATCH_OPTS=${PATCH_OPTS:-"-Np1"}
@@ -103,10 +114,11 @@ function initialize() {
   #PKG_SRC_DIR       ->PKG_BUILD_DIR,PKG_CFG_DIR
   #LIB_SUFFIX        ->DEFAULT_CFG,CFG
   #PREFIX            ->DEFAULT_CFG,CFG
+  #DEFAULT_CMAKE_CFG ->CMAKE_CFG
   #DEFAULT_CFG       ->CFG
-  #DEFAULT_CXXFLAGS  ->DEFAULT_CFG_ENV,CFG_ENV
-  #DEFAULT_CFLAGS    ->DEFAULT_CFG_ENV,CFG_ENV
   #DEFAULT_CFG_ENV   ->CFG_ENV
+  #DEFAULT_CXXFLAGS  ->DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
+  #DEFAULT_CFLAGS    ->DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
   #PKG_CONFIG_PATH_64->PKG_CONFIG_PATH
   #PKG_CONFIG_PATH_32->PKG_CONFIG_PATH
   #CC_32             ->CC
@@ -116,6 +128,7 @@ function initialize() {
   
   _read_props "init.properties"
 
+  [ "$old_CMAKE_CFG" != "_none_" ] && CMAKE_CFG="$old_CMAKE_CFG"
   [ "$old_CFG" != "_none_" ] && CFG="$old_CFG"
   [ "$old_CFG_ENV" != "_none_" ] && CFG_ENV="$old_CFG_ENV"
   [ "$old_COMPILE_OPTS" != "_none_" ] && COMPILE_OPTS="$old_COMPILE_OPTS"
@@ -123,9 +136,18 @@ function initialize() {
   [ "$old_PATCH_OPTS" != "_none_" ] && PATCH_OPTS="$old_PATCH_OPTS"
   
   PKG_SRC_DIR=${PKG_SRC_DIR:-$SRC_DIR/$PKG_LONG_NAME}
-  PKG_BUILD_DIR=${PKG_BUILD_DIR:-$PKG_SRC_DIR}
+  if [ "$IDLE_CONFIG" == "mk" ] ; then
+    PKG_BUILD_DIR=${PKG_BUILD_DIR:-$PKG_SRC_DIR/build}
+  else
+    PKG_BUILD_DIR=${PKG_BUILD_DIR:-$PKG_SRC_DIR}
+  fi
   PKG_CFG_DIR=${PKG_CFG_DIR:-$PKG_SRC_DIR}
 
+  if [ -z "${DEFAULT_CMAKE_CFG:-}" ] ; then
+    DEFAULT_CMAKE_CFG="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_C_FLAGS='$BUILD ${DEFAULT_CFLAGS:-}' -DCMAKE_CXX_FLAGS='$BUILD ${DEFAULT_CXXFLAGS:-}'"
+  fi
+  CMAKE_CFG=${CMAKE_CFG:-$DEFAULT_CMAKE_CFG}
+  
   DEFAULT_CFG=${DEFAULT_CFG:-"--prefix=$PREFIX --libdir=$PREFIX/lib$LIB_SUFFIX"}
   CFG=${CFG:-$DEFAULT_CFG}
   
@@ -158,6 +180,7 @@ function initialize() {
 
   _read_props "post.properties"
   
+  [ "$old_CMAKE_CFG" != "_none_" ] && CMAKE_CFG="$old_CMAKE_CFG"
   [ "$old_CFG" != "_none_" ] && CFG="$old_CFG"
   [ "$old_CFG_ENV" != "_none_" ] && CFG_ENV="$old_CFG_ENV"
   [ "$old_COMPILE_OPTS" != "_none_" ] && COMPILE_OPTS="$old_COMPILE_OPTS"
@@ -167,6 +190,7 @@ function initialize() {
   unpack_script=$(_exec unpack)
   fix_script=$(_exec fix)
   config_script=$(_exec config)
+  cmake_script=$(_exec cmake)
   compile_script=$(_exec compile)
   prepare_script=$(_exec prepare)
   copy_script=$(_exec copy)
@@ -196,22 +220,28 @@ function dump() {
   echo "COPY_OPTS            : $COPY_OPTS"
   echo "CFG                  : $CFG"
   echo "CFG_ENV              : $CFG_ENV"
+  echo "CMAKE_CFG            : $CMAKE_CFG"
   echo "CC                   : ${CC:-}"
   echo "CXX                  : ${CXX:-}"
   echo "PKG_CONFIG_PATH      : ${PKG_CONFIG_PATH:-}"
   echo
   _dump_script "$unpack_script"
   _dump_script "$fix_script"
-  _dump_script "$config_script" "config" "$CFG_ENV $PKG_CFG_DIR/configure $CFG"
+  _dump_script "$config_script"
   _dump_script "$prepare_script"
-  _dump_script "$compile_script" "compile" "make $COMPILE_OPTS"
-  _dump_script "$copy_script" "copy" "make install $COPY_OPTS"
+  _dump_script "$compile_script"
+  _dump_script "$copy_script"
 }
 
 function aide {
   echo "STEP: aide"
 
-  $PKG_CFG_DIR/configure --help
+  if [ "$IDLE_CONFIG" == "mk" ] ; then
+    _clean_build_dir_and_cd
+    cmake -LAH $PKG_SRC_DIR
+  else
+    $PKG_CFG_DIR/configure --help
+  fi
 }
 
 function unpack() {
@@ -250,6 +280,7 @@ function fix() {
     [ -r "$patch_file_path" ] || patch_file_path=""
   fi
   if [ -n "$patch_file_path" ] ; then
+    echo "Applying patches from $patch_file_path"
     unxz -c "$patch_file_path" | patch $PATCH_OPTS
   fi
   
@@ -260,27 +291,17 @@ function fix() {
 
 function config() {
   echo "STEP: config"
-
-  if [ -d "$PKG_BUILD_DIR" -a -d "$PKG_SRC_DIR" ] ; then
-    cd $PKG_BUILD_DIR
-    local b=$PWD
-    
-    cd $PKG_SRC_DIR
-    local s=$PWD
-    
-    if [[ "$s" != "$b"* ]] ; then 
-      if [[ "$b" != "$s"* ]] ; then  
-        rm -fr $PKG_BUILD_DIR
-      fi 
-    fi
-  fi
   
-  mkdir -p $PKG_BUILD_DIR
-  cd $PKG_BUILD_DIR
+  _clean_build_dir_and_cd
+  
   if [ -n "$config_script" ] ; then 
     eval "$config_script" 
   else
-    eval "$CFG_ENV $PKG_CFG_DIR/configure $CFG"
+    if [ "$IDLE_CONFIG" == "mk" ] ; then
+      eval "cmake $CMAKE_CFG $PKG_SRC_DIR"
+    else
+      eval "$CFG_ENV $PKG_CFG_DIR/configure $CFG"
+    fi
   fi
 }
 
@@ -327,7 +348,10 @@ function clean() {
   [ "$DROP_MAN" == "true" ] && rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man
   [ "$DROP_LOCALE" == "true" ] && rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/locale
   
-  [ -d "$DST_DIR/$PKG_LONG_NAME/$PREFIX/usr/share/pkgconfig" ] && mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/usr/share/pkgconfig $DST_DIR/$PKG_LONG_NAME/$PREFIX/usr/lib$LIB_SUFFIX
+  if [ -d "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pkgconfig" ] ; then
+    mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
+    mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pkgconfig $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
+  fi
 
   if [ -d $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pkgconfig ] ; then
     if [ -n "$(command ls -1 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pkgconfig)" ] ; then

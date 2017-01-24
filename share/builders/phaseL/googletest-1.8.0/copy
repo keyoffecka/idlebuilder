@@ -1,0 +1,9 @@
+make $COPY_OPTS install
+
+rm -fr $PKG_BUILD_DIR
+mkdir -pv $PKG_BUILD_DIR
+cd $PKG_BUILD_DIR
+
+eval "cmake $CMAKE_CFG -DBUILD_SHARED_LIBS=yes $PKG_SRC_DIR"
+make $COMPILE_OPTS
+make $COPY_OPTS install

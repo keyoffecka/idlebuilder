@@ -13,7 +13,7 @@ case "$#" in
   ;;
 
   1)
-    initialize "$(basename $0)" "$1"
+    initialize "$1"
     dump
     _ask
     unpack "$1"
@@ -31,7 +31,7 @@ case "$#" in
   *)
     src_pkg_file_name="$1"
   
-    initialize "$(basename $0)" "$src_pkg_file_name"
+    initialize "$src_pkg_file_name"
 
     shift
     

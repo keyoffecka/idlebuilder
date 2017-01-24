@@ -1,0 +1,21 @@
+make $COPY_OPTS install
+
+chmod -v 755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libpython2.7.so.1.0
+
+ln -sfv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7-config
+ln -sv python2-config $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python-config
+ln -sv python2.7-config $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2-config
+
+ln -sfv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7
+ln -sv python2 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python
+ln -sv python2.7 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2
+
+ln -sf ../../libpython2.7.so $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/config/libpython2.7.so
+ 
+mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/smtpd.py $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/
+ 
+install -dm755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/Tools/{i18n,scripts}
+install -m755 Tools/i18n/{msgfmt,pygettext}.py $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/Tools/i18n/
+install -m755 Tools/scripts/{README,*py} $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/Tools/scripts/
+
+sed -i "s#$PKG_SRC_DIR:##" $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/config/Makefile
