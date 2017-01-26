@@ -1,0 +1,1 @@
+eval "$CFG_ENV $PKG_SRC_DIR/bootstrap $CFG"

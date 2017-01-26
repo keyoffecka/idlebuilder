@@ -19,7 +19,7 @@ function run() {
 }
 
 rm /tmp/bld.log >/dev/null 2>&1 || true
-run $* | tee /tmp/bld.log
+run $* 2>&1 | tee /tmp/bld.log
 if [ -r /tmp/bld.result ] ; then
   exit -1
 fi

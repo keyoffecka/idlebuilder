@@ -1,0 +1,2 @@
+eval "$CFG_ENV $PKG_SRC_DIR/config $CFG --openssldir=/etc/ssl zlib-dynamic shared static"
+make depend
