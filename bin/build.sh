@@ -15,7 +15,7 @@ case "$#" in
   1)
     initialize "$1"
     dump
-    _ask
+    [ -z "${BUILD_SKIP:-}" ] && _ask
     unpack "$1"
     fix
     config
@@ -23,7 +23,7 @@ case "$#" in
     compile
     copy
     clean
-    _ask
+    [ -z "${BUILD_SKIP:-}" ] && _ask
     package
     deploy
   ;;
