@@ -1,0 +1,2 @@
+make $COPY_OPTS install install-dev install-lib
+chmod -v 755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libacl.so

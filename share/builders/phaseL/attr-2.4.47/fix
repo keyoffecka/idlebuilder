@@ -1,0 +1,1 @@
+sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in

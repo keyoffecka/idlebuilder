@@ -1,0 +1,1 @@
+make $COPY_OPTS libprivdir=$PREFIX/lib$LIB_SUFFIX/polkit-1 install

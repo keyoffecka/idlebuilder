@@ -105,7 +105,7 @@ function initialize() {
   local old_COPY_OPTS=${COPY_OPTS:-"_none_"}
   local old_PATCH_OPTS=${PATCH_OPTS:-"_none_"}
   
-  _read_file_props "$WORKDIR/etc/phase$PHASE/phase$PHASE.properties"
+  _read_file_props "$WORKDIR/etc/phase$PHASE/boot.properties"
 
   COMPILE_OPTS=${COMPILE_OPTS:-"-j8"}
   COPY_OPTS=${COPY_OPTS:-"DESTDIR=$DST_DIR/$PKG_LONG_NAME"}
@@ -126,7 +126,7 @@ function initialize() {
   #CXX_32            ->CXX
   #CXX_64            ->CXX
   
-  _read_props "init.properties"
+  _read_props "boot.properties"
 
   [ "$old_CMAKE_CFG" != "_none_" ] && CMAKE_CFG="$old_CMAKE_CFG"
   [ "$old_CFG" != "_none_" ] && CFG="$old_CFG"
@@ -178,7 +178,7 @@ function initialize() {
     fi
   fi
 
-  _read_props "post.properties"
+  _read_props "init.properties"
   
   [ "$old_CMAKE_CFG" != "_none_" ] && CMAKE_CFG="$old_CMAKE_CFG"
   [ "$old_CFG" != "_none_" ] && CFG="$old_CFG"

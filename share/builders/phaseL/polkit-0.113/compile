@@ -1,0 +1,1 @@
+make $COMPILE_OPTS libprivdir=$PREFIX/lib$LIB_SUFFIX/polkit-1

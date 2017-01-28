@@ -1,0 +1,4 @@
+make $COPY_OPTS install
+
+chown -v root:messagebus $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/dbus-1.0/dbus-daemon-launch-helper
+chmod -v 4750 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/dbus-1.0/dbus-daemon-launch-helper

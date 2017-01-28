@@ -1,0 +1,1 @@
+sed -r -i 's,LIBTOOL\s*=\s*libtool,LIBTOOL=libtool --tag=CC,' makefile

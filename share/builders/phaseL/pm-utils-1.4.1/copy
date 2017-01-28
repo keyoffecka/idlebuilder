@@ -1,0 +1,3 @@
+make $COPY_OPTS install
+rm -f "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/pm-utils/sleep.d/55NetworkManager"
+rm -f "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/pm-utils/power.d/"{harddrive,disable_wol}
