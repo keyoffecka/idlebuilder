@@ -1,0 +1,4 @@
+make $COPY_OPTS install
+
+install -D -v -m 0664 $DST_DIR/$PKG_LONG_NAME/etc/bash_completion.d/dbus-bash-completion.sh $DST_DIR/$PKG_LONG_NAME/usr/share/bash-completion/completions/dbus-bash-completion
+rm -frv $DST_DIR/$PKG_LONG_NAME/etc

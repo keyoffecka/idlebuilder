@@ -1,1 +1,5 @@
 make $COPY_OPTS libprivdir=$PREFIX/lib$LIB_SUFFIX/polkit-1 install
+
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
+cp -r $DST_DIR/$PKG_LONG_NAME/etc/{dbus-1,polkit-1} $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/
+rm -frv $DST_DIR/$PKG_LONG_NAME/etc/
