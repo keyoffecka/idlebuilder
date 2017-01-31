@@ -1,0 +1,1 @@
+eval "$PKG_CFG_DIR/autogen.sh $CFG"

@@ -1,0 +1,5 @@
+make $COPY_OPTS install
+
+mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/apps/clang/libexec/* $DST_DIR/$PKG_LONG_NAME/$PREFIX/apps/clang/lib$LIB_SUFFIX/clang/
+rm -frv $DST_DIR/$PKG_LONG_NAME/$PREFIX/apps/clang/libexec/
+rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/apps/clang/share/man

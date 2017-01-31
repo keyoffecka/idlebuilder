@@ -121,10 +121,10 @@ function initialize() {
   #DEFAULT_CFLAGS    ->DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
   #PKG_CONFIG_PATH_64->PKG_CONFIG_PATH
   #PKG_CONFIG_PATH_32->PKG_CONFIG_PATH
-  #CC_32             ->CC
-  #CC_64             ->CC
-  #CXX_32            ->CXX
-  #CXX_64            ->CXX
+  #CC_32             ->CC,DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
+  #CC_64             ->CC,DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
+  #CXX_32            ->CXX,DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
+  #CXX_64            ->CXX,DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
   
   _read_props "boot.properties"
 
@@ -143,15 +143,37 @@ function initialize() {
   fi
   PKG_CFG_DIR=${PKG_CFG_DIR:-$PKG_SRC_DIR}
 
+  if [ -z "${CC:-}" ] ; then
+    if [ "$ARCH" == "64" -a -n "${CC_64:-}" ] ; then
+      CC=$CC_64
+    elif [ -n "${CC_32:-}" ] ; then
+      CC=$CC_32
+    fi
+  fi
+  if [ -n "${CC:-}" -a "$IDLE_CONFIG" == "mk" ] ; then
+    CC=`echo $CC | sed -r 's,([^ \t]+).*,\1,'`
+  fi
+
+  if [ -z "${CXX:-}" ] ; then
+    if [ "$ARCH" == "64" -a -n "${CXX_64:-}" ] ; then
+      CXX=$CXX_64
+    elif [ -n "${CXX_32:-}" ] ; then
+      CXX=$CXX_32
+    fi
+  fi
+  if [ -n "${CXX:-}" -a "$IDLE_CONFIG" == "mk" ] ; then
+    CXX=`echo $CXX | sed -r 's,([^ \t]+).*,\1,'`
+  fi
+
   if [ -z "${DEFAULT_CMAKE_CFG:-}" ] ; then
-    DEFAULT_CMAKE_CFG="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_C_FLAGS='$BUILD ${DEFAULT_CFLAGS:-}' -DCMAKE_CXX_FLAGS='$BUILD ${DEFAULT_CXXFLAGS:-}'"
+    DEFAULT_CMAKE_CFG="-DCMAKE_LIBRARY_PATH=/usr/lib$LIB_SUFFIX -DCMAKE_INSTALL_PREFIX=$PREFIX ${CC:+"-DCMAKE_C_COMPILER='$CC'"} ${CXX:+"-DCMAKE_CXX_COMPILER='$CXX'"} -DCMAKE_C_FLAGS='$BUILD ${DEFAULT_CFLAGS:-}' -DCMAKE_CXX_FLAGS='$BUILD ${DEFAULT_CXXFLAGS:-}'"
   fi
   CMAKE_CFG=${CMAKE_CFG:-$DEFAULT_CMAKE_CFG}
   
   DEFAULT_CFG=${DEFAULT_CFG:-"--prefix=$PREFIX --libdir=$PREFIX/lib$LIB_SUFFIX"}
   CFG=${CFG:-$DEFAULT_CFG}
   
-  DEFAULT_CFG_ENV=${DEFAULT_CFG_ENV:-"${DEFAULT_CXXFLAGS:+CXXFLAGS='$DEFAULT_CXXFLAGS'} ${DEFAULT_CFLAGS:+CFLAGS='$DEFAULT_CFLAGS'}"}
+  DEFAULT_CFG_ENV=${DEFAULT_CFG_ENV:-"${CC:+"-DCMAKE_C_COMPILER='$CC'"} ${CXX:+"-DCMAKE_CXX_COMPILER='$CXX'"} ${DEFAULT_CXXFLAGS:+CXXFLAGS='$DEFAULT_CXXFLAGS'} ${DEFAULT_CFLAGS:+CFLAGS='$DEFAULT_CFLAGS'}"}
   CFG_ENV=${CFG_ENV:-$DEFAULT_CFG_ENV}
   
   if [ -z "${PKG_CONFIG_PATH:-}" ] ; then
@@ -159,22 +181,6 @@ function initialize() {
       export PKG_CONFIG_PATH=$PKG_CONFIG_PATH_64
     elif [ -n "${PKG_CONFIG_PATH_32:-}" ] ; then
       export PKG_CONFIG_PATH=$PKG_CONFIG_PATH_32
-    fi
-  fi
-
-  if [ -z "${CC:-}" ] ; then
-    if [ "$ARCH" == "64" -a -n "${CC_64:-}" ] ; then
-      export CC=$CC_64
-    elif [ -n "${CC_32:-}" ] ; then
-      export CC=$CC_32
-    fi
-  fi
-
-  if [ -z "${CXX:-}" ] ; then
-    if [ "$ARCH" == "64" -a -n "${CXX_64:-}" ] ; then
-      export CXX=$CXX_64
-    elif [ -n "${CXX_32:-}" ] ; then
-      export CXX=$CXX_32
     fi
   fi
 
@@ -224,6 +230,8 @@ function dump() {
   echo "CC                   : ${CC:-}"
   echo "CXX                  : ${CXX:-}"
   echo "PKG_CONFIG_PATH      : ${PKG_CONFIG_PATH:-}"
+  echo "LD_LIBRARY_PATH      : ${LD_LIBRARY_PATH:-}"
+  echo "PATH                 : ${PATH:-}"
   echo
   _dump_script "$unpack_script"
   _dump_script "$fix_script"
