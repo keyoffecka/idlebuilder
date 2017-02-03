@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ "$ARCH" == "32" ] ; then
+  /usr/bin/g++ -m32 $*
+else
+  /usr/bin/g++ -m64 $*
+fi

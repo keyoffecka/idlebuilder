@@ -150,9 +150,6 @@ function initialize() {
       CC=$CC_32
     fi
   fi
-  if [ -n "${CC:-}" -a "$IDLE_CONFIG" == "mk" ] ; then
-    CC=`echo $CC | sed -r 's,([^ \t]+).*,\1,'`
-  fi
 
   if [ -z "${CXX:-}" ] ; then
     if [ "$ARCH" == "64" -a -n "${CXX_64:-}" ] ; then
@@ -161,19 +158,16 @@ function initialize() {
       CXX=$CXX_32
     fi
   fi
-  if [ -n "${CXX:-}" -a "$IDLE_CONFIG" == "mk" ] ; then
-    CXX=`echo $CXX | sed -r 's,([^ \t]+).*,\1,'`
-  fi
 
   if [ -z "${DEFAULT_CMAKE_CFG:-}" ] ; then
-    DEFAULT_CMAKE_CFG="-DCMAKE_LIBRARY_PATH=/usr/lib$LIB_SUFFIX -DCMAKE_INSTALL_PREFIX=$PREFIX ${CC:+"-DCMAKE_C_COMPILER='$CC'"} ${CXX:+"-DCMAKE_CXX_COMPILER='$CXX'"} -DCMAKE_C_FLAGS='$BUILD ${DEFAULT_CFLAGS:-}' -DCMAKE_CXX_FLAGS='$BUILD ${DEFAULT_CXXFLAGS:-}'"
+    DEFAULT_CMAKE_CFG="-DCMAKE_LIBRARY_PATH=/usr/lib$LIB_SUFFIX -DCMAKE_INSTALL_PREFIX=$PREFIX ${CC:+"-DCMAKE_C_COMPILER='$CC'"} ${CXX:+"-DCMAKE_CXX_COMPILER='$CXX'"} -DCMAKE_C_FLAGS='${DEFAULT_CFLAGS:-}' -DCMAKE_CXX_FLAGS='${DEFAULT_CXXFLAGS:-}'"
   fi
   CMAKE_CFG=${CMAKE_CFG:-$DEFAULT_CMAKE_CFG}
   
   DEFAULT_CFG=${DEFAULT_CFG:-"--prefix=$PREFIX --libdir=$PREFIX/lib$LIB_SUFFIX"}
   CFG=${CFG:-$DEFAULT_CFG}
   
-  DEFAULT_CFG_ENV=${DEFAULT_CFG_ENV:-"${CC:+"-DCMAKE_C_COMPILER='$CC'"} ${CXX:+"-DCMAKE_CXX_COMPILER='$CXX'"} ${DEFAULT_CXXFLAGS:+CXXFLAGS='$DEFAULT_CXXFLAGS'} ${DEFAULT_CFLAGS:+CFLAGS='$DEFAULT_CFLAGS'}"}
+  DEFAULT_CFG_ENV=${DEFAULT_CFG_ENV:-"${CC:+"CC='$CC'"} ${CXX:+"CXX='$CXX'"} ${DEFAULT_CXXFLAGS:+CXXFLAGS='$DEFAULT_CXXFLAGS'} ${DEFAULT_CFLAGS:+CFLAGS='$DEFAULT_CFLAGS'}"}
   CFG_ENV=${CFG_ENV:-$DEFAULT_CFG_ENV}
   
   if [ -z "${PKG_CONFIG_PATH:-}" ] ; then

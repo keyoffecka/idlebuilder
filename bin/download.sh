@@ -15,6 +15,13 @@ case "$name" in
     ;;
   lib)
     base="http://ftp.x.org/pub/individual/lib/"
+    ;;
+  app)
+    base="http://ftp.x.org/pub/individual/app/"
+    ;;
+  font)
+    base="http://ftp.x.org/pub/individual/font/"
+    ;;
 esac
 
 mkdir -pv "$REPO_DIR/$name"

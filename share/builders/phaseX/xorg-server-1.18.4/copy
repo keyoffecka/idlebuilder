@@ -1,0 +1,4 @@
+make $COPY_OPTS install
+
+cp -vr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/X11 $DST_DIR/$PKG_LONG_NAME/etc
+rm -frv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/X11

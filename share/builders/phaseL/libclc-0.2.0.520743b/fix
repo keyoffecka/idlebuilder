@@ -1,0 +1,1 @@
+python $PKG_SRC_DIR/generic/lib/gen_convert.py > $PKG_SRC_DIR/generic/lib/convert.cl
