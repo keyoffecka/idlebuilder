@@ -1,0 +1,5 @@
+make $COPY_OPTS install
+
+install -d -o root -g sys -m 0700 $DST_DIR/$PKG_LONG_NAME/var/libsshd
+install -v -m755 contrib/ssh-copy-id $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin 
+install -v -m644 contrib/ssh-copy-id.1 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1

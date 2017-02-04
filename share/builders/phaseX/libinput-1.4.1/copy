@@ -1,0 +1,5 @@
+make $COPY_OPTS install
+
+mkdir -p $DST_DIR/$PKG_LONG_NAME/etc/udev
+mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/udev/hwdb.d/ $DST_DIR/$PKG_LONG_NAME/etc/udev/
+rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/udev/

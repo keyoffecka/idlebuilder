@@ -1,0 +1,1 @@
+sed -i '/^usbids/ s:usb.ids:hwdata/&:' lsusb.py

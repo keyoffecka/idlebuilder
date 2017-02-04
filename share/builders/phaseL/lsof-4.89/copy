@@ -1,0 +1,5 @@
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man8
+
+install -v -m0755 -o root -g root lsof $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+install -v -m0644 lsof.8 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man8
