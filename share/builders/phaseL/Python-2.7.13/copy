@@ -11,11 +11,15 @@ ln -sv python2 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python
 ln -sv python2.7 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2
 
 ln -sf ../../libpython2.7.so $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/config/libpython2.7.so
- 
+
 mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/smtpd.py $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/
- 
+
 install -dm755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/Tools/{i18n,scripts}
 install -m755 Tools/i18n/{msgfmt,pygettext}.py $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/Tools/i18n/
 install -m755 Tools/scripts/{README,*py} $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/Tools/scripts/
 
 sed -i "s#$PKG_SRC_DIR:##" $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/config/Makefile
+
+for file in $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/2to3 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/idle $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/pydoc $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7-config-$ARCH; do
+  sed -r -i "s,#\!/usr/bin/python2\.7-$ARCH,#\!/usr/bin/python2," $file
+done

@@ -160,16 +160,24 @@ function initialize() {
   fi
 
   if [ -z "${DEFAULT_CMAKE_CFG:-}" ] ; then
-    DEFAULT_CMAKE_CFG="-DCMAKE_INSTALL_LIBDIR=lib$LIB_SUFFIX -DCMAKE_LIBRARY_PATH=$PREFIX/lib$LIB_SUFFIX -DCMAKE_INSTALL_PREFIX=$PREFIX ${CC:+"-DCMAKE_C_COMPILER='$CC'"} ${CXX:+"-DCMAKE_CXX_COMPILER='$CXX'"} -DCMAKE_C_FLAGS='${DEFAULT_CFLAGS:-}' -DCMAKE_CXX_FLAGS='${DEFAULT_CXXFLAGS:-}'"
+    # ...LIBRARY_PATH - is to help CMake to find libraries when it fails to find them in the `well known places`
+    #
+    # Unfortunately in practice CMake community lacks conventions and many projects use and respect different variables.
+    # Some projects do not respect CMAKE_LIBRARY_PATH and support only LIB_SUFFIX or other way around
+    # This is unlike in AutoConf community where almost every project supports --prefix --libdir --libexecdir and friends very well.
+    # Supposely CMake doesn't help in this sense and allows developers do not respect user's file system layouts,
+    # while AutoConf makes breaking the user's layout somewhat more difficult task for lazy software developers.
+    #
+    DEFAULT_CMAKE_CFG="-DCMAKE_LIBRARY_PATH=$PREFIX/lib$LIB_SUFFIX -DLIB_SUFFIX=$LIB_SUFFIX -DCMAKE_INSTALL_LIBDIR=lib$LIB_SUFFIX -DCMAKE_INSTALL_PREFIX=$PREFIX ${CC:+"-DCMAKE_C_COMPILER='$CC'"} ${CXX:+"-DCMAKE_CXX_COMPILER='$CXX'"} -DCMAKE_C_FLAGS='${DEFAULT_CFLAGS:-}' -DCMAKE_CXX_FLAGS='${DEFAULT_CXXFLAGS:-}'"
   fi
   CMAKE_CFG=${CMAKE_CFG:-$DEFAULT_CMAKE_CFG}
-  
+
   DEFAULT_CFG=${DEFAULT_CFG:-"--prefix=$PREFIX --libdir=$PREFIX/lib$LIB_SUFFIX"}
   CFG=${CFG:-$DEFAULT_CFG}
-  
-  DEFAULT_CFG_ENV=${DEFAULT_CFG_ENV:-"${CC:+"CC='$CC'"} ${CXX:+"CXX='$CXX'"} ${DEFAULT_CXXFLAGS:+CXXFLAGS='$DEFAULT_CXXFLAGS'} ${DEFAULT_CFLAGS:+CFLAGS='$DEFAULT_CFLAGS'}"}
+
+  DEFAULT_CFG_ENV=${DEFAULT_CFG_ENV:-"LDFLAGS=${DEFAULT_LDFLAGS-$BUILD} ${CC:+"CC='$CC'"} ${CXX:+"CXX='$CXX'"} ${DEFAULT_CXXFLAGS:+CXXFLAGS='$DEFAULT_CXXFLAGS'} ${DEFAULT_CFLAGS:+CFLAGS='$DEFAULT_CFLAGS'}"}
   CFG_ENV=${CFG_ENV:-$DEFAULT_CFG_ENV}
-  
+
   if [ -z "${PKG_CONFIG_PATH:-}" ] ; then
     if [ "$ARCH" == "64" -a -n "${PKG_CONFIG_PATH_64:-}" ] ; then
       export PKG_CONFIG_PATH=$PKG_CONFIG_PATH_64
@@ -179,14 +187,14 @@ function initialize() {
   fi
 
   _read_props "init.properties"
-  
+
   [ "$old_CMAKE_CFG" != "_none_" ] && CMAKE_CFG="$old_CMAKE_CFG"
   [ "$old_CFG" != "_none_" ] && CFG="$old_CFG"
   [ "$old_CFG_ENV" != "_none_" ] && CFG_ENV="$old_CFG_ENV"
   [ "$old_COMPILE_OPTS" != "_none_" ] && COMPILE_OPTS="$old_COMPILE_OPTS"
   [ "$old_COPY_OPTS" != "_none_" ] && COPY_OPTS="$old_COPY_OPTS"
   [ "$old_PATCH_OPTS" != "_none_" ] && PATCH_OPTS="$old_PATCH_OPTS"
-  
+
   unpack_script=$(_exec unpack)
   fix_script=$(_exec fix)
   config_script=$(_exec config)

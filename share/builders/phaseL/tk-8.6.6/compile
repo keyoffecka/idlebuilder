@@ -1,0 +1,5 @@
+make $COMPILE_OPTS
+
+sed -e "s@^\(TK_SRC_DIR='\).*@\1/usr/include'@" \
+    -e "/TK_B/s@='\(-L\)\?.*unix@='\1/usr/lib@" \
+    -i tkConfig.sh

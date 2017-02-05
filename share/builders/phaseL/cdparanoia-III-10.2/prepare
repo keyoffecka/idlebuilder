@@ -1,0 +1,3 @@
+for f in `find -name Makefile` ; do
+  sed -r -i -e "s,^CC=.+,CC=gcc $BUILD," -e "s,^LD=.+,LD=gcc $BUILD," $f
+done

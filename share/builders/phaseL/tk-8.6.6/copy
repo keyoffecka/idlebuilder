@@ -1,0 +1,5 @@
+make $COPY_OPTS install
+make $COPY_OPTS install-private-headers
+
+ln -v -sf wish8.6 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/wish
+chmod -v 755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libtk8.6.so
