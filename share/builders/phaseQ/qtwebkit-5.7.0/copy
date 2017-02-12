@@ -1,0 +1,5 @@
+make $COPY_OPTS install
+
+find $DST_DIR/$PKG_LONG_NAME/$QT5DIR/lib$LIB_SUFFIX/pkgconfig -name "*.pc" -exec perl -pi -e "s, -L$PWD/?\S+,,g" {} \;
+find $DST_DIR/$PKG_LONG_NAME/$QT5DIR/ -name qt_lib_bootstrap_private.pri -exec sed -i -e "s:$PWD/qtbase:/$QT5DIR/lib/:g" {} \; &&
+find $DST_DIR/$PKG_LONG_NAME/$QT5DIR/ -name \*.prl -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;

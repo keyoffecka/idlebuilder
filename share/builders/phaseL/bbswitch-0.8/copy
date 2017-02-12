@@ -1,0 +1,2 @@
+make $COPY_OPTS install
+chmod 0664 $DST_DIR/$PKG_LONG_NAME/lib/modules/`uname -r`/misc/$PKG_NAME/bbswitch.ko

@@ -1,0 +1,7 @@
+sed -r \
+    -e 's,\$\$LIB/libGL.so.1,$$LIB/primus/libGL.so.1,' \
+    -i Makefile
+
+sed -r \
+    -e 's,\$\$LIB/nvidia/libGL.so.1,$$LIB/libGL.so.1,' \
+    -i Makefile

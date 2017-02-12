@@ -119,6 +119,7 @@ function initialize() {
   #DEFAULT_CFG_ENV   ->CFG_ENV
   #DEFAULT_CXXFLAGS  ->DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
   #DEFAULT_CFLAGS    ->DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
+  #DEFAULT_LDLAGS    ->DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
   #PKG_CONFIG_PATH_64->PKG_CONFIG_PATH
   #PKG_CONFIG_PATH_32->PKG_CONFIG_PATH
   #CC_32             ->CC,DEFAULT_CFG_ENV,CFG_ENV,DEFAULT_CMAKE_CFG,CMAKE_CFG
@@ -136,7 +137,7 @@ function initialize() {
   [ "$old_PATCH_OPTS" != "_none_" ] && PATCH_OPTS="$old_PATCH_OPTS"
   
   PKG_SRC_DIR=${PKG_SRC_DIR:-$SRC_DIR/$PKG_LONG_NAME}
-  if [ "$IDLE_CONFIG" == "mk" ] ; then
+  if [ "$IDLE_CONFIG" == "mk" -o "$IDLE_CONFIG" == "qmk" ] ; then
     PKG_BUILD_DIR=${PKG_BUILD_DIR:-$PKG_SRC_DIR/build}
   else
     PKG_BUILD_DIR=${PKG_BUILD_DIR:-$PKG_SRC_DIR}
@@ -174,6 +175,9 @@ function initialize() {
 
   DEFAULT_CFG=${DEFAULT_CFG:-"--prefix=$PREFIX --libdir=$PREFIX/lib$LIB_SUFFIX"}
   CFG=${CFG:-$DEFAULT_CFG}
+  
+  DEFAULT_QMAKE_CFG="${DEFAULT_QMAKE_CFG:-}"
+  QMAKE_CFG=${QMAKE_CFG:-$DEFAULT_QMAKE_CFG}
 
   DEFAULT_CFG_ENV=${DEFAULT_CFG_ENV:-"LDFLAGS=${DEFAULT_LDFLAGS-$BUILD} ${CC:+"CC='$CC'"} ${CXX:+"CXX='$CXX'"} ${DEFAULT_CXXFLAGS:+CXXFLAGS='$DEFAULT_CXXFLAGS'} ${DEFAULT_CFLAGS:+CFLAGS='$DEFAULT_CFLAGS'}"}
   CFG_ENV=${CFG_ENV:-$DEFAULT_CFG_ENV}
@@ -226,9 +230,15 @@ function dump() {
   echo "IDLE_TARGET          : $IDLE_TARGET"
   echo "COMPILE_OPTS         : $COMPILE_OPTS"
   echo "COPY_OPTS            : $COPY_OPTS"
+  echo "PATCH_OPTS           : $PATCH_OPTS"
   echo "CFG                  : $CFG"
   echo "CFG_ENV              : $CFG_ENV"
   echo "CMAKE_CFG            : $CMAKE_CFG"
+  echo "QMAKE_CFG            : $QMAKE_CFG"
+  echo "BUILD                : $BUILD"
+  echo "DEFAULT_CFLAGS       : ${DEFAULT_CFLAGS:-}"
+  echo "DEFAULT_CXXFLAGS     : ${DEFAULT_CXXFLAGS:-}"
+  echo "DEFAULT_LDFLAGS      : ${DEFAULT_LDFLAGS-$BUILD}"
   echo "CC                   : ${CC:-}"
   echo "CXX                  : ${CXX:-}"
   echo "PKG_CONFIG_PATH      : ${PKG_CONFIG_PATH:-}"
@@ -249,6 +259,9 @@ function aide {
   if [ "$IDLE_CONFIG" == "mk" ] ; then
     _clean_build_dir_and_cd
     cmake -LAH $PKG_SRC_DIR
+  elif [ "$IDLE_CONFIG" == "qmk" ] ; then
+    echo "Operation aide is not supported"
+    exit -1
   else
     $PKG_CFG_DIR/configure --help
   fi
@@ -308,7 +321,9 @@ function config() {
     eval "$config_script" 
   else
     if [ "$IDLE_CONFIG" == "mk" ] ; then
-      eval "cmake $CMAKE_CFG $PKG_SRC_DIR"
+      eval "cmake $CMAKE_CFG $PKG_CFG_DIR"
+    elif [ "$IDLE_CONFIG" == "qmk" ] ; then
+      eval "qmake $QMAKE_CFG"
     else
       eval "$CFG_ENV $PKG_CFG_DIR/configure $CFG"
     fi
@@ -358,11 +373,6 @@ function clean() {
   [ "$DROP_MAN" == "true" ] && rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man
   [ "$DROP_LOCALE" == "true" ] && rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/locale
   
-  if [ -d "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pkgconfig" ] ; then
-    mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
-    mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pkgconfig $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
-  fi
-
   if [ -d $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pkgconfig ] ; then
     if [ -n "$(command ls -1 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pkgconfig)" ] ; then
       mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/pkgconfig

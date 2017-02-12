@@ -1,0 +1,2 @@
+sed -r -e 's,DESTINATION lib,&${LIB_SUFFIX},' -i CMakeLists.txt
+sed -r -e 's,DESTINATION lib,&${LIB_SUFFIX},' -i CMakeModules/create_pkgconfig_file.cmake

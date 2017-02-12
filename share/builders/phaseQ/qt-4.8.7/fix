@@ -1,0 +1,7 @@
+sed -r \
+    -e 's,5\*|4\*,6*|&,' \
+    -i $PKG_SRC_DIR/configure
+
+sed -r \
+    -e 's,SND_LIB_MINOR == 0 \&\& SND_LIB_SUBMINOR >= 10,((SND_LIB_MINOR == 0 \&\& SND_LIB_SUBMINOR >= 10) || SND_LIB_MINOR >= 1),' \
+    -i $PKG_SRC_DIR/config.tests/unix/alsa/alsatest.cpp

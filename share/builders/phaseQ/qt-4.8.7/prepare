@@ -1,0 +1,6 @@
+sed -r \
+    -e 's,(\$\(QMAKE\) +)-spec,\1LIBS+="-lQtCLucene" -spec,' \
+    -i $PKG_SRC_DIR/tools/assistant/tools/assistant/Makefile \
+    -i $PKG_SRC_DIR/tools/assistant/tools/qcollectiongenerator/Makefile \
+    -i $PKG_SRC_DIR/tools/assistant/tools/qhelpconverter/Makefile \
+    -i $PKG_SRC_DIR/tools/assistant/tools/qhelpgenerator/Makefile

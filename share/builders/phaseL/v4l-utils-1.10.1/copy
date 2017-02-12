@@ -1,0 +1,4 @@
+make $COPY_OPTS install
+
+cp -r $DST_DIR/$PKG_LONG_NAME/lib/udev/rc_keymaps $DST_DIR/$PKG_LONG_NAME/etc
+rm -fr $DST_DIR/$PKG_LONG_NAME/lib

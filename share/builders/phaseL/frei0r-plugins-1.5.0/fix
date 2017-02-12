@@ -1,0 +1,5 @@
+sed -r \
+  -e "s,lib/pkgconfig,lib$LIB_SUFFIX/pkgconfig," \
+  -e "s,lib/frei,lib$LIB_SUFFIX/frei," \
+  -e "s,/lib,&$LIB_SUFFIX," \
+  -i CMakeLists.txt

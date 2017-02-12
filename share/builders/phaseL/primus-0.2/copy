@@ -1,0 +1,10 @@
+install -D "lib$LIB_SUFFIX/libGL.so.1" "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/primus/libGL.so.1"
+
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+sed -e "s#^PRIMUS_libGL=.*#PRIMUS_libGL='/usr/\$LIB/primus:/usr/lib32:/usr/lib64'#" primusrun > $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/primusrun
+chmod 0775 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/primusrun
+
+install -D "primus.bash-completion" "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/bash-completion/completions/primusrun"
+
+gzip -9 "primusrun.1"
+install -D "primusrun.1.gz" "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1/primusrun.1.gz"

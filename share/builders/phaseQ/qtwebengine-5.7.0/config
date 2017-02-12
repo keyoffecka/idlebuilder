@@ -1,0 +1,1 @@
+eval "$CFG_ENV $QT5PREFIX/bin/qmake $CFG $PKG_CFG_DIR"

@@ -1,0 +1,6 @@
+make $COPY_OPTS install
+
+rm -fr $DST_DIR/$PKG_LONG_NAME/etc/udev/
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/bash-completion/completions/
+mv $DST_DIR/$PKG_LONG_NAME/etc/bash_completion.d/* $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/bash-completion/completions/
+rm -fr $DST_DIR/$PKG_LONG_NAME/etc/bash_completion.d/
