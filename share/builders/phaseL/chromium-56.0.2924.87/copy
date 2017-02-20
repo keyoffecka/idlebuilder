@@ -1,0 +1,24 @@
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/$CPREFIX
+
+install -vDm755  out/Release/chrome $DST_DIR/$PKG_LONG_NAME/$CPREFIX/chromium
+install -vDm4755 out/Release/chrome_sandbox $DST_DIR/$PKG_LONG_NAME/$CPREFIX/chromium-sandbox
+install -vDm755  out/Release/chromedriver $DST_DIR/$PKG_LONG_NAME/$CPREFIX/chromium-driver
+
+install -vm755 out/Release/libwidevinecdmadapter.so $DST_DIR/$PKG_LONG_NAME/$CPREFIX
+install -vDm644 out/Release/icudtl.dat $DST_DIR/$PKG_LONG_NAME/$CPREFIX
+install -vDm644 out/Release/gen/content/content_resources.pak $DST_DIR/$PKG_LONG_NAME/$CPREFIX
+install -vm644 out/Release/{*.pak,*.bin} $DST_DIR/$PKG_LONG_NAME/$CPREFIX
+
+cp -av out/Release/locales $DST_DIR/$PKG_LONG_NAME/$CPREFIX
+install -vDm644 out/Release/chrome.1 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1/chromium.1
+
+for size in 16 32; do
+    install -vDm644 \
+        "chrome/app/theme/default_100_percent/chromium/product_logo_$size.png" \
+        "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+done
+
+for size in 22 24 48 64 128 256; do
+    install -vDm644 "chrome/app/theme/chromium/product_logo_$size.png" \
+        "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+done

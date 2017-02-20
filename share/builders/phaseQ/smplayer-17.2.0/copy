@@ -1,0 +1,1 @@
+make DESTDIR=$DST_DIR/$PKG_LONG_NAME DOC_PATH=$PREFIX/share/doc/smplayer PREFIX=$PREFIX install

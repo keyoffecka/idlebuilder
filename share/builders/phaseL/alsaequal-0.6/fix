@@ -1,0 +1,8 @@
+sed -r \
+    -e "/^Q/s,.*,Q ?=," \
+    -e "s,/usr/lib/,$PREFIX/lib$LIB_SUFFIX/,g" \
+    -i Makefile
+
+sed -r \
+    -e "s,/usr/lib/ladspa/caps.so,/usr/lib$LIB_SUFFIX/ladspa/caps.so," \
+    -i ctl_equal.c -i pcm_equal.c

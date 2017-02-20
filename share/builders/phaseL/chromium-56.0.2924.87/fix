@@ -1,0 +1,19 @@
+sed 's/#include <sys\/mman\.h>/&\n\n#if defined(MADV_FREE)\n#undef MADV_FREE\n#endif\n/' \
+    -i third_party/WebKit/Source/wtf/allocator/PageAllocator.cpp
+
+sed "s/^config(\"compiler\") {/&\ncflags_cc = [ \"-fno-delete-null-pointer-checks\" ]/" \
+    -i build/config/linux/BUILD.gn
+
+sed "s/WIDEVINE_CDM_AVAILABLE/&\n\n#define WIDEVINE_CDM_VERSION_STRING \"Pinkie Pie\"/" \
+    -i third_party/widevine/cdm/stub/widevine_cdm_version.h
+
+for _lib_ in flac harfbuzz-ng libwebp libxslt yasm; do
+    find -type f -path "*third_party/$_lib_/*" \
+        \! -path "*third_party/$_lib_/chromium/*" \
+        \! -path "*third_party/$_lib_/google/*" \
+        \! -regex '.*\.\(gn\|gni\|isolate\|py\)' \
+        -delete
+done
+
+python build/linux/unbundle/replace_gn_files.py \
+    --system-libraries flac harfbuzz-ng libwebp libxslt yasm

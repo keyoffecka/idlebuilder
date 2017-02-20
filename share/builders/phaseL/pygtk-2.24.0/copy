@@ -1,0 +1,4 @@
+make $COPY_OPTS install
+
+install -m644 gtk/gtk-extrafuncs.defs "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pygtk/2.0/defs/"
+install -Dm644 gtk/pygtk.h "$DST_DIR/$PKG_LONG_NAME/$PREFIX/include/pygtk-2.0/pygtk/pygtk.h"

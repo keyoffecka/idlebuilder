@@ -1,0 +1,2 @@
+patch $PATCH_OPTS <$REPO_DIR/$PKG_LONG_NAME.patches || true
+rm -r doc/reference/html

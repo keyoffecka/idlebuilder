@@ -1,0 +1,1 @@
+python $PKG_SRC_DIR/mscript.py build $CFG

@@ -1,0 +1,4 @@
+echo ${GN_CONFIG[*]}
+
+python tools/gn/bootstrap/bootstrap.py --gn-gen-args "${GN_CONFIG[*]}"
+out/Release/gn gen out/Release --args="${GN_CONFIG[*]}"

@@ -1,0 +1,3 @@
+find -O3 \
+    \( -name '*.py' -o -name '*.py.in' \) \
+    -exec sed -i '1s|python$|&2|' {} +

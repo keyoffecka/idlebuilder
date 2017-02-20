@@ -1,0 +1,3 @@
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/$CPREFIX
+install -Dm755 chromium-launcher $DST_DIR/$PKG_LONG_NAME/$CPREFIX
+install -Dm755 launcher-errmsg $DST_DIR/$PKG_LONG_NAME/$CPREFIX

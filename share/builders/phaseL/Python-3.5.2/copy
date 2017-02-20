@@ -5,15 +5,20 @@ ln -sfv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5m-config
 ln -sfv python3.5m-config-$ARCH $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5-config-$ARCH
 ln -sfv python3.5-config-$ARCH $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3-config-$ARCH
 
-rm -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5-$ARCH
-ln -sfv python3.5m-$ARCH $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5-$ARCH
+sed -r \
+    -e "s,__incdir_32__,$PREFIX/lib32/python3.5/include/python3.5m," \
+    -e "s,__incdir_64__,$PREFIX/lib64/python3.5/include/python3.5m," \
+    $WORKDIR/share/files/$PKG_LONG_NAME/pyconfig-wrapper.h > $DST_DIR/$PKG_LONG_NAME/$PREFIX/include/python3.5m/pyconfig.h
 
-ln -sfv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5m
-ln -sfv python3.5m $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5
-ln -sfv python3.5 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3
+rm -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5
+ln -sv python3.5m $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5
+
+mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5m $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5m-$ARCH
+sed -r \
+  -e "s,\{PYTHON_HOME\},$PREFIX," \
+  -e "s,\{PY_EXEC\},$PREFIX/bin/python3.5m," \
+  -e "s,\{PYTHON_PATH\},$PREFIX/lib$LIB_SUFFIX/python3.5m/lib-dynload," \
+  $WORKDIR/share/files/$PKG_LONG_NAME/python3_wrapper.c | \
+  gcc $BUILD $DEFAULT_CFLAGS -x c -o $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python3.5m -
 
 rm -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/2to3
-
-for file in $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/2to3-3.5 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/idle3.5 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/pydoc3.5 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/pyvenv-3.5 ; do
-  sed -r -i "s,#\!/usr/bin/python3\.5-$ARCH,#\!/usr/bin/python3," $file
-done

@@ -1,0 +1,4 @@
+make $COPY_OPTS install install-mplayer install-mplayer-man install-mencoder install-mencoder-man
+
+install -Dm 644 etc/{codecs.conf,input.conf,example.conf} "$DST_DIR/$PKG_LONG_NAME/etc/mplayer"
+install -Dm 644 etc/mplayer256x256.png "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pixmaps/mplayer.png"

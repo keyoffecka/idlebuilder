@@ -2,13 +2,23 @@ make $COPY_OPTS install
 
 chmod -v 755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libpython2.7.so.1.0
 
-ln -sfv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7-config
-ln -sv python2-config $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python-config
-ln -sv python2.7-config $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2-config
+sed -r \
+    -e "s,__incdir_32__,$PREFIX/lib32/python2.7/include/python2.7," \
+    -e "s,__incdir_64__,$PREFIX/lib64/python2.7/include/python2.7," \
+    $WORKDIR/share/files/$PKG_LONG_NAME/pyconfig-wrapper.h > $DST_DIR/$PKG_LONG_NAME/$PREFIX/include/python2.7/pyconfig.h
 
-ln -sfv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7
-ln -sv python2 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python
-ln -sv python2.7 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2
+mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7-config $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7-config-$ARCH
+ln -sv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7-config
+ln -sv python2-config-$ARCH $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python-config-$ARCH
+ln -sv python2.7-config-$ARCH $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2-config-$ARCH
+
+mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7-$ARCH
+sed -r \
+  -e "s,\{PYTHON_HOME\},$PREFIX," \
+  -e "s,\{PY_EXEC\},$PREFIX/bin/python2.7," \
+  -e "s,\{PYTHON_PATH\},$PREFIX/lib$LIB_SUFFIX/python2.7/site-packages," \
+  $WORKDIR/share/files/$PKG_LONG_NAME/python2_wrapper.c | \
+  gcc $BUILD $DEFAULT_CFLAGS -x c -o $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7 -
 
 ln -sf ../../libpython2.7.so $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/config/libpython2.7.so
 
@@ -19,7 +29,3 @@ install -m755 Tools/i18n/{msgfmt,pygettext}.py $DST_DIR/$PKG_LONG_NAME/$PREFIX/l
 install -m755 Tools/scripts/{README,*py} $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/Tools/scripts/
 
 sed -i "s#$PKG_SRC_DIR:##" $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/python2.7/config/Makefile
-
-for file in $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/2to3 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/idle $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/pydoc $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/python2.7-config-$ARCH; do
-  sed -r -i "s,#\!/usr/bin/python2\.7-$ARCH,#\!/usr/bin/python2," $file
-done

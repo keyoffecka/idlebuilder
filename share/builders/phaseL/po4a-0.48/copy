@@ -1,0 +1,2 @@
+perl Build destdir=$DST_DIR/$PKG_LONG_NAME install
+find $DST_DIR/$PKG_LONG_NAME -name .packlist -o -name perllocal.pod -delete
