@@ -1,0 +1,16 @@
+make LIBDIR=$PREFIX/lib$LIB_SUFFIX BINDIR=$PREFIX/bin $COPY_OPTS install
+
+install -d -m755 "$DST_DIR/$PKG_LONG_NAME/etc/wpa_supplicant"
+install -Dm644 wpa_supplicant.conf "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/doc/wpa_supplicant/wpa_supplicant.conf"
+
+install -d -m755 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man"{5,8}
+install -m644 doc/docbook/*.5 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man5/"
+install -m644 doc/docbook/*.8 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man8/"
+rm -f "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man8/wpa_"{priv,gui}.8
+
+install -d -m755 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/dbus-1/system-services"
+install -m644 dbus/fi.{epitest.hostap.WPASupplicant,w1.wpa_supplicant1}.service \
+              "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/dbus-1/system-services/"
+
+install -Dm644 dbus/dbus-wpa_supplicant.conf \
+              "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/dbus-1/system.d/wpa_supplicant.conf"

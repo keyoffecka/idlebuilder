@@ -1,0 +1,1 @@
+make LIBS+="-lglib-2.0"

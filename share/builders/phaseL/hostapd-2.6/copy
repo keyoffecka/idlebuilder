@@ -1,0 +1,10 @@
+install -d "$DST_DIR/$PKG_LONG_NAME/$PREFIX/bin"
+install -t "$DST_DIR/$PKG_LONG_NAME/$PREFIX/bin" hostapd hostapd_cli
+
+install -d "$DST_DIR/$PKG_LONG_NAME/etc/hostapd"
+install -dm755 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/hostapd"
+install -m644 -t "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/hostapd" \
+                 hostapd.{accept,conf,deny,eap_user,radius_clients,sim_db,vlan,wpa_psk} wired.conf hlr_auc_gw.milenage_db
+
+install -Dm644 hostapd.8 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man8/hostapd.8"
+install -Dm644 hostapd_cli.1 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1/hostapd_cli.1"

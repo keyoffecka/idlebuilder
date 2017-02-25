@@ -1,0 +1,1 @@
+sed 's/-DG_DISABLE_DEPRECATED//' -i linc2/src/Makefile

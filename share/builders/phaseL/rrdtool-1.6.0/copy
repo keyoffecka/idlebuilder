@@ -1,0 +1,1 @@
+make $COPY_OPTS includedir=$PREFIX/include install

@@ -1,0 +1,4 @@
+install -d $DST_DIR/$PKG_LONG_NAME/${SSLDIR}/certs
+cp -v certs/*.pem $DST_DIR/$PKG_LONG_NAME/${SSLDIR}/certs
+install -m0664 BLFS-ca-bundle*.crt $DST_DIR/$PKG_LONG_NAME/${SSLDIR}/ca-bundle.crt
+ln -sfv ../ca-bundle.crt $DST_DIR/$PKG_LONG_NAME/${SSLDIR}/certs/ca-certificates.crt
