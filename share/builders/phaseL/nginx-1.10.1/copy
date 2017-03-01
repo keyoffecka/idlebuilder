@@ -1,0 +1,13 @@
+make $COPY_OPTS install
+mkdir -pv "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/nginx
+mv "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/html/ "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/nginx
+install -d "$DST_DIR/$PKG_LONG_NAME"/var/lib/nginx
+install -dm700 "$DST_DIR/$PKG_LONG_NAME"/var/lib/nginx/proxy
+rmdir "$DST_DIR/$PKG_LONG_NAME"/run
+
+install -d "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/man/man8/
+gzip -9c man/nginx.8 > "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/man/man8/nginx.8.gz
+
+for i in ftdetect indent syntax; do
+  install -Dm644 contrib/vim/${i}/nginx.vim "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/vim/vimfiles/${i}/nginx.vim"
+done

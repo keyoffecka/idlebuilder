@@ -1,0 +1,2 @@
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+cp -v * $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin

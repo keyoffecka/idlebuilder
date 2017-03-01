@@ -1,0 +1,1 @@
+CFLAGS="-march=$IDLE_CPU -mtune=generic -O2 -pipe -fomit-frame-pointer" make $COMPILE_OPTS

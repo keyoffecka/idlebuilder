@@ -1,0 +1,37 @@
+pkgroot=$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/xml/docbook/xsl-stylesheets-$PKG_VERSION
+
+install -dm755 ${pkgroot}
+install -m644 VERSION VERSION.xsl ${pkgroot}
+
+for fn in assembly common eclipse epub epub3 fo highlighting html htmlhelp javahelp lib \
+          manpages params profiling roundtrip template website xhtml xhtml-1_1 xhtml5; do
+  install -dm755 ${pkgroot}/${fn}
+  install -m644 ${fn}/*.{xml,xsl,dtd,ent} ${pkgroot}/${fn} || true
+done
+
+mkdir -p $DST_DIR/$PKG_LONG_NAME/etc/xml
+if [ -f /etc/xml/docbook-xml ] ; then
+  cp /etc/xml/docbook-xml $DST_DIR/$PKG_LONG_NAME/etc/xml
+else
+  xmlcatalog --noout --create $DST_DIR/$PKG_LONG_NAME/etc/xml/docbook-xml
+fi
+
+xmlcatalog --noout --add "rewriteSystem" \
+           "http://docbook.sourceforge.net/release/xsl/$PKG_VERSION" \
+           "$PREFIX/share/xml/docbook/xsl-stylesheets-$PKG_VERSION" \
+           $DST_DIR/$PKG_LONG_NAME/etc/xml/docbook-xml
+
+xmlcatalog --noout --add "rewriteURI" \
+           "http://docbook.sourceforge.net/release/xsl/$PKG_VERSION" \
+           "/usr/share/xml/docbook/xsl-stylesheets-$PKG_VERSION" \
+           $DST_DIR/$PKG_LONG_NAME/etc/xml/docbook-xml
+
+xmlcatalog --noout --add "rewriteSystem" \
+           "http://docbook.sourceforge.net/release/xsl/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-$PKG_VERSION" \
+           $DST_DIR/$PKG_LONG_NAME/etc/xml/docbook-xml
+
+xmlcatalog --noout --add "rewriteURI" \
+           "http://docbook.sourceforge.net/release/xsl/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-$PKG_VERSION" \
+           $DST_DIR/$PKG_LONG_NAME/etc/xml/docbook-xml

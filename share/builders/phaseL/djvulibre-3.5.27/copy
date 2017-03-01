@@ -1,0 +1,6 @@
+make $COPY_OPTS install
+
+for sz in 22 32 48 64; do
+  install -Dm644 desktopfiles/prebuilt-hi${sz}-djvu.png \
+    "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/icons/hicolor/${sz}x${sz}/mimetypes/image-vnd.djvu.mime.png"
+done
