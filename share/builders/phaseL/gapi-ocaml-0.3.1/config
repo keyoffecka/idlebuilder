@@ -1,0 +1,1 @@
+ocaml setup.ml -configure $CFG
