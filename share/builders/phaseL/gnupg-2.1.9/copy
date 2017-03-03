@@ -1,0 +1,4 @@
+make $COPY_OPTS install
+ln -s gpg2 "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/bin/gpg
+ln -s gpgv2 "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/bin/gpgv
+ln -s gpg2.1.gz "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/man/man1/gpg.1.gz
