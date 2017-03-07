@@ -1,0 +1,5 @@
+make $COPY_OPTS install
+
+rm -rfv $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/CLuceneConfig.cmake
+  
+ln -s ../../lib$LIB_SUFFIX/CLucene/clucene-config.h $DST_DIR/$PKG_LONG_NAME/$PREFIX/include/CLucene/clucene-config.h

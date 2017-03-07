@@ -1,0 +1,2 @@
+install -d $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/fonts/OTF
+install -m644 *.otf $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/fonts/OTF

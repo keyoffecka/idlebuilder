@@ -1,0 +1,5 @@
+sed -i 's/avcodec_alloc_frame/av_frame_alloc/g' operations/external/ff-*.c
+sed -i 's/OR_DATA_TYPE_CFA/OR_DATA_TYPE_RAW/' operations/external/openraw.c
+sed -ri 's/(libopenraw(-gnome)?)-1\.0/\1-0.1/' configure.ac
+
+autoreconf -vi

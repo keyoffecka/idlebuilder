@@ -1,0 +1,15 @@
+install -Dm644 hyph_es_ANY.dic "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/hyphen/hyph_es_ANY.dic"
+
+pushd "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/hyphen/"
+  es_ES_aliases="es_AR es_BO es_CL es_CO es_CR es_CU es_DO es_EC es_ES es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_SV es_UY es_VE"
+  for lang in $es_ES_aliases; do
+    ln -s hyph_es_ANY.dic hyph_$lang.dic
+  done
+popd
+
+install -dm755 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/myspell/dicts"
+pushd "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/myspell/dicts"
+  for file in "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/hyphen/*; do
+    ln -sv ../../hyphen/$(basename $file) .
+  done
+popd

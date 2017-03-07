@@ -1,0 +1,1 @@
+ make prefix="$DST_DIR/$PKG_LONG_NAME"/usr install

@@ -368,7 +368,7 @@ function clean() {
   mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
   [ -d "$DST_DIR/$PKG_LONG_NAME/$PREFIX/man" ] && mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/man $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
 
-  rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/{,share}/{info,doc,gtk-doc}
+  rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/{,share}/{info,doc,gtk-doc,applications}
   
   [ "$DROP_MAN" == "true" ] && rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man
   [ "$DROP_LOCALE" == "true" ] && rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/locale

@@ -1,0 +1,12 @@
+make $COPY_OPTS install
+
+install -dm 755 $DST_DIR/$PKG_LONG_NAME/etc
+echo '# Simply write the paper name. See papersize(5) for possible values' > $DST_DIR/$PKG_LONG_NAME/etc/papersize
+
+install -dm 755 $DST_DIR/$PKG_LONG_NAME/etc/libpaper.d
+
+cd debian/po/
+for i in `ls *.po`; do
+	install -dm 755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/locale/${i%.po}/LC_MESSAGES/
+	msgfmt $i -o $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/locale/${i%.po}/LC_MESSAGES/$PKG_NAME.mo
+done
