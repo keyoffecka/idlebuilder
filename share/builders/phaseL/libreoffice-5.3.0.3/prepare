@@ -1,0 +1,4 @@
+sed -r \
+    -i 's,exit 1;,,' \
+    -i Makefile
+    

@@ -1,0 +1,7 @@
+make $COPY_OPTS install
+
+ln -sv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/libpng-config-$ARCH
+
+cd contrib/pngminus
+make LDFLAGS="$BUILD" CFLAGS="$DEFAULT_CFLAGS" PNGLIB="-L$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX -lpng" -f makefile.std png2pnm pnm2png
+install -m755 png2pnm pnm2png "$DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/"

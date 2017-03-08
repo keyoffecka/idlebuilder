@@ -1,0 +1,4 @@
+install -Dm755 libunrar.so.$PKG_VERSION "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libunrar.so.$PKG_VERSION"
+install -Dm644 dll.hpp "$DST_DIR/$PKG_LONG_NAME/$PREFIX/include/unrar/dll.hpp"
+ln -s libunrar.so.$PKG_VERSION "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libunrar.so.5"
+ln -s libunrar.so.$PKG_VERSION "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libunrar.so"

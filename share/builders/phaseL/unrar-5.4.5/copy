@@ -1,0 +1,1 @@
+install -Dm755 unrar "$DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/unrar"

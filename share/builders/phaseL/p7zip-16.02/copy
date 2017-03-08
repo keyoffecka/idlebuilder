@@ -1,0 +1,5 @@
+make install \
+    DEST_DIR="$DST_DIR/$PKG_LONG_NAME" \
+    DEST_HOME=$PREFIX \
+    DEST_SHARE=$PREFIX/lib$LIB_SUFFIX/p7zip \
+    DEST_MAN=$PREFIX/share/man

@@ -1,0 +1,18 @@
+make $COPY_OPTS distro-pack-install
+
+install -dm755 $DST_DIR/$PKG_LONG_NAME/etc/libreoffice
+install -m644 $DST_DIR/$PKG_LONG_NAME/$LO_PREFIX/lib/libreoffice/program/{bootstraprc,sofficerc} $DST_DIR/$PKG_LONG_NAME/etc/libreoffice/
+install -m644 $DST_DIR/$PKG_LONG_NAME/$LO_PREFIX/lib/libreoffice/share/psprint/psprint.conf $DST_DIR/$PKG_LONG_NAME/etc/libreoffice/
+
+ln -vsf /etc/libreoffice/bootstraprc $DST_DIR/$PKG_LONG_NAME/$LO_PREFIX/lib/libreoffice/program/bootstraprc
+ln -vsf /etc/libreoffice/sofficerc $DST_DIR/$PKG_LONG_NAME/$LO_PREFIX/lib/libreoffice/program/sofficerc
+ln -vsf /etc/libreoffice/psprint.conf $DST_DIR/$PKG_LONG_NAME/$LO_PREFIX/lib/libreoffice/share/psprint/psprint.conf
+
+mv $DST_DIR/$PKG_LONG_NAME/$LO_PREFIX/share/{appdata,application-registry,icons,man,mime,mime-info,mimelnk} \
+  $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
+  
+mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/bash-completion/completions/libreoffice.sh \
+  $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/bash-completion/completions/libreoffice
+
+rm -fr $DST_DIR/$PKG_LONG_NAME/$LO_PREFIX/share
+rm -fr $DST_DIR/$PKG_LONG_NAME/gid_*

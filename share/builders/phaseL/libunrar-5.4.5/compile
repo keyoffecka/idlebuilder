@@ -1,0 +1,1 @@
+make $COMPILE_OPTS lib libversion=$PKG_VERSION CXXFLAGS="${CXXFLAGS}"
