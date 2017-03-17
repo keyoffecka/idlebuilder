@@ -1,0 +1,3 @@
+make $COPY_OPTS install
+
+install -Dm0644 unclutter.man $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1/unclutter.1
