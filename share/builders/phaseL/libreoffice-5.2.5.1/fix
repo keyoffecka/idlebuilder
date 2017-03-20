@@ -2,7 +2,7 @@ sed -e "/distro-install-file-lists/d" -i Makefile.in
 
 mkdir -pv $SRC_DIR/$PKG_LONG_NAME/external/tarballs/
 
-cp $REPO_DIR/gdocs_3.0.1_modified.oxt $SRC_DIR/$PKG_LONG_NAME/external/tarballs/27211596cf0ad97cab7321239406fde0-gdocs_3.0.1_modified.oxt
+cp $REPO_DIR/gdocs-3.0.1modified.oxt $SRC_DIR/$PKG_LONG_NAME/external/tarballs/27211596cf0ad97cab7321239406fde0-gdocs_3.0.1_modified.oxt
 cp $REPO_DIR/liblangtag-0.5.8.tar.bz2 $SRC_DIR/$PKG_LONG_NAME/external/tarballs/aa899eff126216dafe721149fbdb511b-liblangtag-0.5.8.tar.bz2
 cp $REPO_DIR/OOOP-fonts-pack-2.9.0.0.zip $SRC_DIR/$PKG_LONG_NAME/external/tarballs/a10aa597411643326e27d7fc128af12d-OOOP-fonts-pack-2.9.0.0.zip
 cp $REPO_DIR/OOOP-gallery-pack-2.8.0.0.zip $SRC_DIR/$PKG_LONG_NAME/external/tarballs/af9314c5972d95a5d6da23ffad818f68-OOOP-gallery-pack-2.8.0.0.zip

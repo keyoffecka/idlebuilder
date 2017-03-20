@@ -10,7 +10,7 @@ cp $REPO_DIR/cppunit-1.13.2.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/cpp
 cp $REPO_DIR/libe-book-0.1.2.tar.bz2 $SRC_DIR/$PKG_LONG_NAME/external/tarballs/libe-book-0.1.2.tar.bz2
 cp $REPO_DIR/libetonyek-0.1.6.tar.bz2 $SRC_DIR/$PKG_LONG_NAME/external/tarballs/libetonyek-0.1.6.tar.bz2
 cp $REPO_DIR/libfreehand-0.1.1.tar.bz2 $SRC_DIR/$PKG_LONG_NAME/external/tarballs/libfreehand-0.1.1.tar.bz2
-cp $REPO_DIR/gdocs_3.0.1_modified.oxt $SRC_DIR/$PKG_LONG_NAME/external/tarballs/27211596cf0ad97cab7321239406fde0-gdocs_3.0.1_modified.oxt
+cp $REPO_DIR/gdocs-3.0.1modified.oxt $SRC_DIR/$PKG_LONG_NAME/external/tarballs/27211596cf0ad97cab7321239406fde0-gdocs_3.0.1_modified.oxt
 cp $REPO_DIR/hyphen-2.8.8.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/5ade6ae2a99bc1e9e57031ca88d36dad-hyphen-2.8.8.tar.gz
 cp $REPO_DIR/libexttextcat-3.4.4.tar.bz2 $SRC_DIR/$PKG_LONG_NAME/external/tarballs/10d61fbaa6a06348823651b1bd7940fe-libexttextcat-3.4.4.tar.bz2
 cp $REPO_DIR/language-subtag-registry-2016-07-19.tar.bz2 $SRC_DIR/$PKG_LONG_NAME/external/tarballs/language-subtag-registry-2016-07-19.tar.bz2
@@ -19,7 +19,7 @@ cp $REPO_DIR/xmlsec1-1.2.23.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/86b
 cp $REPO_DIR/crosextrafonts-20130214.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/368f114c078f94214a308a74c7e991bc-crosextrafonts-20130214.tar.gz
 cp $REPO_DIR/crosextrafonts-carlito-20130920.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/c74b7223abe75949b4af367942d96c7a-crosextrafonts-carlito-20130920.tar.gz
 cp $REPO_DIR/dejavu-fonts-ttf-2.37.zip $SRC_DIR/$PKG_LONG_NAME/external/tarballs/33e1e61fab06a547851ed308b4ffef42-dejavu-fonts-ttf-2.37.zip
-cp $REPO_DIR/GentiumBasic_1102.zip $SRC_DIR/$PKG_LONG_NAME/external/tarballs/1725634df4bb3dcb1b2c91a6175f8789-GentiumBasic_1102.zip
+cp $REPO_DIR/GentiumBasic-1102.zip $SRC_DIR/$PKG_LONG_NAME/external/tarballs/1725634df4bb3dcb1b2c91a6175f8789-GentiumBasic_1102.zip
 cp $REPO_DIR/liberation-fonts-ttf-1.07.4.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/134d8262145fc793c6af494dcace3e71-liberation-fonts-ttf-1.07.4.tar.gz
 cp $REPO_DIR/liberation-fonts-ttf-2.00.1.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/5c781723a0d9ed6188960defba8e91cf-liberation-fonts-ttf-2.00.1.tar.gz
 cp $REPO_DIR/LinLibertineG-20120116.zip $SRC_DIR/$PKG_LONG_NAME/external/tarballs/e7a384790b13c29113e22e596ade9687-LinLibertineG-20120116.zip
@@ -32,7 +32,7 @@ cp $REPO_DIR/libmspub-0.1.2.tar.bz2 $SRC_DIR/$PKG_LONG_NAME/external/tarballs/li
 cp $REPO_DIR/libmwaw-0.3.9.tar.bz2 $SRC_DIR/$PKG_LONG_NAME/external/tarballs/libmwaw-0.3.9.tar.bz2
 cp $REPO_DIR/mythes-1.2.4.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/a8c2c5b8f09e7ede322d5c602ff6a4b6-mythes-1.2.4.tar.gz
 cp $REPO_DIR/libodfgen-0.1.6.tar.bz2 $SRC_DIR/$PKG_LONG_NAME/external/tarballs/libodfgen-0.1.6.tar.bz2
-cp $REPO_DIR/openldap-2.4.44.tgz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/openldap-2.4.44.tgz
+cp $REPO_DIR/openldap-2.4.44.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/openldap-2.4.44.tgz
 cp $REPO_DIR/libpagemaker-0.0.3.tar.bz2 $SRC_DIR/$PKG_LONG_NAME/external/tarballs/libpagemaker-0.0.3.tar.bz2
 cp $REPO_DIR/raptor2-2.0.15.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/a39f6c07ddb20d7dd2ff1f95fa21e2cd-raptor2-2.0.15.tar.gz
 cp $REPO_DIR/rasqal-0.9.33.tar.gz $SRC_DIR/$PKG_LONG_NAME/external/tarballs/1f5def51ca0026cd192958ef07228b52-rasqal-0.9.33.tar.gz
