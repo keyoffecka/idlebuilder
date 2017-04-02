@@ -104,6 +104,7 @@ function initialize() {
   local old_COMPILE_OPTS=${COMPILE_OPTS:-"_none_"}
   local old_COPY_OPTS=${COPY_OPTS:-"_none_"}
   local old_PATCH_OPTS=${PATCH_OPTS:-"_none_"}
+  local old_NO_STRIP=${NO_STRIP:-"_none_"}
   
   _read_file_props "$WORKDIR/etc/phase$PHASE/boot.properties"
 
@@ -135,6 +136,7 @@ function initialize() {
   [ "$old_COMPILE_OPTS" != "_none_" ] && COMPILE_OPTS="$old_COMPILE_OPTS"
   [ "$old_COPY_OPTS" != "_none_" ] && COPY_OPTS="$old_COPY_OPTS"
   [ "$old_PATCH_OPTS" != "_none_" ] && PATCH_OPTS="$old_PATCH_OPTS"
+  [ "$old_NO_STRIP" != "_none_" ] && NO_STRIP="$old_NO_STRIP"
   
   PKG_SRC_DIR=${PKG_SRC_DIR:-$SRC_DIR/$PKG_LONG_NAME}
   if [ "$IDLE_CONFIG" == "mk" -o "$IDLE_CONFIG" == "qmk" ] ; then
@@ -198,6 +200,7 @@ function initialize() {
   [ "$old_COMPILE_OPTS" != "_none_" ] && COMPILE_OPTS="$old_COMPILE_OPTS"
   [ "$old_COPY_OPTS" != "_none_" ] && COPY_OPTS="$old_COPY_OPTS"
   [ "$old_PATCH_OPTS" != "_none_" ] && PATCH_OPTS="$old_PATCH_OPTS"
+  [ "$old_NO_STRIP" != "_none_" ] && NO_STRIP="$old_NO_STRIP"
 
   unpack_script=$(_exec unpack)
   fix_script=$(_exec fix)
@@ -431,7 +434,9 @@ function clean() {
     [ -z "$(command ls -1 $DST_DIR/$PKG_LONG_NAME/$PREFIX/sbin)" ] && rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/sbin
   fi
 
-  find $DST_DIR/$PKG_LONG_NAME/$PREFIX/{,usr/}{bin,sbin,lib,lib32,lib64} -type f -exec strip --strip-debug '{}' ';' 2>/dev/null || true
+  if [ "${NO_STRIP:-}" != "y" ] ; then 
+    find $DST_DIR/$PKG_LONG_NAME/$PREFIX/{,usr/}{bin,sbin,lib,lib32,lib64} -type f -exec strip --strip-debug '{}' ';' 2>/dev/null || true
+  fi
   
   if [ -n "${WRAP:-}" ] ; then
     for f in $WRAP ; do

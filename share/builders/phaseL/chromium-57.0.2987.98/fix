@@ -1,0 +1,68 @@
+echo "Setting WIDEVINE_CDM_VERSION_STRING to $WIDEVINE_VERSION"
+sed '14i#define WIDEVINE_CDM_VERSION_STRING "'$WIDEVINE_VERSION'"' \
+    -i third_party/widevine/cdm/stub/widevine_cdm_version.h
+
+# Possible values:
+# ULIBS=(
+#   'bzip2'
+#   'ffmpeg'
+#   'flac'
+#   'harfbuzz'
+#   'icu'
+#   'libevent'
+#   'libjpeg'
+#   'libpng'
+#   'libxml'
+#   'libxslt'
+#   'opus'
+#   'snappy'
+#   'yasm'
+#   'zlib'
+# )
+
+for ULIB in ${ULIBS[@]}; do
+  echo "Removing $ULIB"
+  find -type f -path "*third_party/$ULIB/*" \
+    \! -path "*third_party/$ULIB/chromium/*" \
+    \! -path "*third_party/$ULIB/google/*" \
+    \! -regex '.*\.\(gn\|gni\|isolate\|py\)' \
+    -delete
+done
+
+if [ -n "$ULIBS" ] ; then
+  echo "Replacing bundled libs with the system ones"
+  $PKG_SRC_DIR/build/linux/unbundle/replace_gn_files.py --system-libraries ${ULIBS[@]}
+fi
+
+echo Fixing Chromium issue \#386097
+$PKG_SRC_DIR/third_party/libaddressinput/chromium/tools/update-strings.py 
+
+echo Making Chromium use the system usb.ids at run time instead of the one compiled in
+sed -i $PKG_SRC_DIR/device/usb/BUILD.gn \
+  -e 's|//third_party/usb_ids/usb.ids|/usr/share/hwdata/usb.ids|g'
+
+echo Fixing Chromium issue https://groups.google.com/a/chromium.org/d/topic/chromium-packagers/9JX1N2nf4PU/discussion
+touch $PKG_SRC_DIR/chrome/test/data/webui/i18n_process_css_test.html
+
+echo Making the build process not fail by generating $PKG_SRC_DIR/chrome/test/data/webui_test_resources.grd
+if [ ! -f $PKG_SRC_DIR/chrome/test/data/webui_test_resources.grd ]; then
+cat <<EOF >$PKG_SRC_DIR/chrome/test/data/webui_test_resources.grd
+<?xml version="1.0" encoding="UTF-8"?>
+<grit latest_public_release="0" current_release="1">
+  <outputs>
+    <output filename="chrome/test/data/grit/webui_test_resources.h" type="rc_header">
+      <emit emit_type='prepend'></emit>
+    </output>
+    <output filename="webui_test_resources.pak" type="data_package" />
+  </outputs>
+  <release seq="1">
+  </release>
+</grit>
+EOF
+fi
+
+echo "Downloading the NACL toolchains"
+$PKG_SRC_DIR/build/download_nacl_toolchains.py --packages nacl_x86_newlib,pnacl_newlib,pnacl_translator sync --extract
+
+echo "Downloading CLang needed by NACL"
+$PKG_SRC_DIR/tools/clang/scripts/update.py

@@ -1,0 +1,1 @@
+make $COMPILE_OPTS prefix=$PREFIX libdir=$PREFIX/lib$LIB_SUFFIX

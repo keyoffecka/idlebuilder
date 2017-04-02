@@ -1,0 +1,1 @@
+ninja $COMPILE_OPTS -C out/Release pdf chrome chrome_sandbox chromedriver widevinecdmadapter clearkeycdm

@@ -1,0 +1,28 @@
+install -D out/Release/chrome "$DST_DIR/$PKG_LONG_NAME/$CPREFIX/chromium"
+
+install -Dm4755 out/Release/chrome_sandbox \
+  "$DST_DIR/$PKG_LONG_NAME/$CPREFIX/chrome-sandbox"
+
+install -D out/Release/chromedriver "$DST_DIR/$PKG_LONG_NAME/$CPREFIX/chromedriver"
+
+cp out/Release/{*.pak,*.bin,libwidevinecdmadapter.so} \
+  "$DST_DIR/$PKG_LONG_NAME/$CPREFIX"
+
+cp -a out/Release/locales "$DST_DIR/$PKG_LONG_NAME/$CPREFIX"
+
+install -Dm644 out/Release/chrome.1 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1/chromium.1"
+
+for size in 22 24 48 64 128 256; do
+  install -Dm644 "chrome/app/theme/chromium/product_logo_$size.png" \
+    "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+done
+
+for size in 16 32; do
+  install -Dm644 "chrome/app/theme/default_100_percent/chromium/product_logo_$size.png" \
+    "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+done
+
+install -Dm644 out/Release/icudtl.dat "$DST_DIR/$PKG_LONG_NAME/$CPREFIX/icudtl.dat"
+
+cp out/Release/nacl_helper{,_bootstrap} out/Release/nacl_irt_*.nexe \
+  "$DST_DIR/$PKG_LONG_NAME/$CPREFIX"

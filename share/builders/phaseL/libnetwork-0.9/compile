@@ -1,0 +1,1 @@
+go build $PKG_SRC_DIR/cmd/proxy

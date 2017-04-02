@@ -1,0 +1,2 @@
+$PKG_SRC_DIR/build/linux/unbundle/replace_gyp_files.py "${GN_CONFIG[@]}"
+$PKG_SRC_DIR/build/gyp_chromium --depth=. "${GN_CONFIG[@]}"

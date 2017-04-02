@@ -1,0 +1,4 @@
+touch chrome/test/data/webui/i18n_process_css_test.html
+sed -i "/'target_name': 'libvpx'/s/libvpx/&_new/" build/linux/unbundle/libvpx.gyp
+sed "s/@WIDEVINE_VERSION@/Pinkie Pie/" $REPO_DIR/$PKG_LONG_NAME.patches | patch -Np1
+find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +

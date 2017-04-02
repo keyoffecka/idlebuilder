@@ -1,0 +1,3 @@
+install -Dm0755 nc "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/bin/nc
+ln -s nc "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/bin/netcat
+install -Dm0644 nc.1 "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/man/man1/nc.1
