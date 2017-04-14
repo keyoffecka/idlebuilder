@@ -1,0 +1,3 @@
+rm -fr $PKG_WORK_DIR || true
+mkdir -pv $PKG_WORK_DIR/src/github.com/docker
+ln -sv $PKG_SRC_DIR $PKG_WORK_DIR/src/github.com/docker/containerd

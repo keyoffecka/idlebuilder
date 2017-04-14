@@ -1,0 +1,3 @@
+install -Dm755 bin/containerd "$DST_DIR/$PKG_LONG_NAME/$PREFIX/docker-containerd"
+install -Dm755 bin/containerd-shim "$DST_DIR/$PKG_LONG_NAME/$PREFIX/docker-containerd-shim"
+install -Dm755 bin/ctr "$DST_DIR/$PKG_LONG_NAME/$PREFIX/docker-containerd-ctr"
