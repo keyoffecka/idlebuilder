@@ -1,0 +1,9 @@
+make $COPY_OPTS install
+
+install -d -m755 "${DST_DIR}/${PKG_LONG_NAME}/etc/dovecot/conf.d"
+install -m 755  doc/mkcert.sh "${DST_DIR}/${PKG_LONG_NAME}/$PREFIX/lib$LIB_SUFFIX/dovecot/mkcert.sh"
+
+rm -f ${DST_DIR}/${PKG_LONG_NAME}/etc/dovecot/README
+
+cp -a ${DST_DIR}/${PKG_LONG_NAME}/$PREFIX/share/doc/dovecot/dovecot-openssl.cnf ${DST_DIR}/${PKG_LONG_NAME}/$PREFIX/share/dovecot
+cp -a ${DST_DIR}/${PKG_LONG_NAME}/$PREFIX/share/doc/dovecot/example-config ${DST_DIR}/${PKG_LONG_NAME}/$PREFIX/share/dovecot

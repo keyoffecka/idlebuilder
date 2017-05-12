@@ -1,0 +1,35 @@
+sed 's:bin/postconf -dhx:bin/postconf -c conf -dhx:g' -i postfix-install
+LD_LIBRARY_PATH=lib \
+sh postfix-install -non-interactive install_root="${DST_DIR}/${PKG_LONG_NAME}"
+
+for name in posttls-finger {smtp,qmqp}-{sink,source}; do
+  install -Dm644 "man/man1/${name}.1" "${DST_DIR}/${PKG_LONG_NAME}/$PREFIX/share/man/man1/${name}.1"
+  install -Dm755 "bin/${name}" "${DST_DIR}/${PKG_LONG_NAME}/$PREFIX/bin/${name}"
+done
+
+rm -fr /tmp/idlebuilder/builds/$PKG_LONG_NAME || true
+mkdir -p /tmp/idlebuilder/builds/$PKG_LONG_NAME
+
+PI=/tmp/idlebuilder/builds/$PKG_LONG_NAME/post-install
+
+sed -r \
+  -e '/override=1/d' \
+  -e '/absolute path name/d' \
+  -e 's/\$POSTCONF -/$POSTCONF -c .\/etc\/postfix -/g' \
+  -e '/(if \[|chmod|chown|find|mkdir|test)/s/\$path/.\/$path/g' \
+  libexec/post-install > $PI
+  
+cd ${DST_DIR}/${PKG_LONG_NAME}
+
+LD_LIBRARY_PATH=${DST_DIR}/${PKG_LONG_NAME}/$PREFIX/lib$LIB_SUFFIX/postfix \
+sh "$PI" \
+  command_directory=./$PREFIX/bin \
+  config_directory=./etc/postfix \
+  meta_directory=./etc/postfix \
+  setgid_group=73 \
+  mail_owner=73 \
+  set-permissions
+
+patch --no-backup-if-mismatch -p0 -i "$WORKDIR"/share/files/$PKG_LONG_NAME/aliases.patch
+
+rm ${DST_DIR}/${PKG_LONG_NAME}/etc/postfix/*LICENSE
