@@ -1,0 +1,1 @@
+PATH=$EPREFIX/bin:$PATH make release

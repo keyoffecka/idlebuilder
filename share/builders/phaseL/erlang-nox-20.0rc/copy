@@ -1,0 +1,5 @@
+make RELEASE_ROOT=$DST_DIR/$PKG_LONG_NAME/$EPREFIX release
+
+cd $DST_DIR/$PKG_LONG_NAME/$EPREFIX
+./Install -cross -minimal $EPREFIX
+rm Install

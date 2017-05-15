@@ -1,0 +1,2 @@
+sed -i 's|$ROOTDIR/etc/vm.args|/etc/couchdb/vm.args|' rel/overlay/bin/couchdb
+sed -i 's/17|18|19/&|20/' rebar.config.script src/snappy/rebar.config
