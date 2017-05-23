@@ -1,0 +1,10 @@
+sed -i -e '5i\ ' conf/cupsd.conf.in
+sed -i -e '6i# Disable cups internal logging - use logrotate instead' conf/cupsd.conf.in
+sed -i -e '7iMaxLogSize 0' conf/cupsd.conf.in
+
+aclocal -I config-scripts
+autoconf -I config-scripts
+
+sed -r \
+    -e "s,CUPS_SERVERBIN=.+,CUPS_SERVERBIN=\"\$exec_prefix/lib$LIB_SUFFIX/cups\"," \
+    -i configure
