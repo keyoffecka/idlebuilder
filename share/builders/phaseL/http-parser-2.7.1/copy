@@ -1,0 +1,4 @@
+make PREFIX="$DST_DIR/$PKG_LONG_NAME/$PREFIX" install
+
+mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
+ln -sf libhttp_parser.so.$PKG_VERSION "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libhttp_parser.so"

@@ -1,0 +1,7 @@
+make NPMOPTS="--prefix=\"$DST_DIR/$PKG_LONG_NAME/$NPREFIX\"" install
+
+chown -R root $DST_DIR/$PKG_LONG_NAME/$NPREFIX/lib/node_modules
+
+rm -frv $DST_DIR/$PKG_LONG_NAME/$NPREFIX/etc
+cp $DST_DIR/$PKG_LONG_NAME/$NPREFIX/lib/node_modules/npm/bin/node-gyp-bin/node-gyp $DST_DIR/$PKG_LONG_NAME/$NPREFIX/bin/node-gyp
+sed -i 's|"`dirname "$0"`/../../|"`dirname "$0"`/../lib/node_modules/npm/|' $DST_DIR/$PKG_LONG_NAME/$NPREFIX/bin/node-gyp

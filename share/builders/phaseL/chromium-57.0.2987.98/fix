@@ -3,35 +3,58 @@ sed '14i#define WIDEVINE_CDM_VERSION_STRING "'$WIDEVINE_VERSION'"' \
     -i third_party/widevine/cdm/stub/widevine_cdm_version.h
 
 # Possible values:
-# ULIBS=(
+# TO_DELETE=(
 #   'bzip2'
 #   'ffmpeg'
 #   'flac'
-#   'harfbuzz'
+#   'harfbuzz-ng'
 #   'icu'
 #   'libevent'
 #   'libjpeg'
 #   'libpng'
 #   'libxml'
 #   'libxslt'
+#   'libwebp'
 #   'opus'
 #   'snappy'
 #   'yasm'
 #   'zlib'
 # )
 
-for ULIB in ${ULIBS[@]}; do
-  echo "Removing $ULIB"
-  find -type f -path "*third_party/$ULIB/*" \
-    \! -path "*third_party/$ULIB/chromium/*" \
-    \! -path "*third_party/$ULIB/google/*" \
-    \! -regex '.*\.\(gn\|gni\|isolate\|py\)' \
-    -delete
-done
+# Possible values:
+# TO_LINK=(
+#   'bzip2'
+#   'ffmpeg'
+#   'flac'
+#   'harfbuzz-ng'
+#   'icu'
+#   'libevent'
+#   'libjpeg'
+#   'libpng'
+#   'libxml'
+#   'libxslt'
+#   'libwebp'
+#   'opus'
+#   'snappy'
+#   'yasm'
+#   'minizip'
+# )
 
-if [ -n "$ULIBS" ] ; then
+if [ -n "${TO_DELETE:-}" ] ; then
+  for NAME in ${TO_DELETE[@]}; do
+    echo "Removing $NAME"
+    find -type f -path "*third_party/$NAME/*" \
+      \! -path "*third_party/$NAME/chromium/*" \
+      \! -path "*third_party/$NAME/google/*" \
+      \! -path "*base/third_party/icu/*" \
+      \! -regex '.*\.\(gn\|gni\|isolate\|py\)' \
+      -delete
+  done
+fi
+
+if [ -n "${TO_LINK:-}" ] ; then
   echo "Replacing bundled libs with the system ones"
-  $PKG_SRC_DIR/build/linux/unbundle/replace_gn_files.py --system-libraries ${ULIBS[@]}
+  $PKG_SRC_DIR/build/linux/unbundle/replace_gn_files.py --system-libraries ${TO_LINK[@]}
 fi
 
 echo Fixing Chromium issue \#386097
@@ -61,8 +84,10 @@ cat <<EOF >$PKG_SRC_DIR/chrome/test/data/webui_test_resources.grd
 EOF
 fi
 
-echo "Downloading the NACL toolchains"
-$PKG_SRC_DIR/build/download_nacl_toolchains.py --packages nacl_x86_newlib,pnacl_newlib,pnacl_translator sync --extract
+if [ "$USE_NACL" = "true" ] ; then
+  #echo "Downloading the NACL toolchains"
+  $PKG_SRC_DIR/build/download_nacl_toolchains.py --packages nacl_x86_newlib,pnacl_newlib,pnacl_translator sync --extract
 
-echo "Downloading CLang needed by NACL"
-$PKG_SRC_DIR/tools/clang/scripts/update.py
+  #echo "Downloading CLang needed by NACL"
+  $PKG_SRC_DIR/tools/clang/scripts/update.py
+fi

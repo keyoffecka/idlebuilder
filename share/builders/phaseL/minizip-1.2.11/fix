@@ -1,0 +1,2 @@
+cd $PKG_CFG_DIR
+autoreconf --install

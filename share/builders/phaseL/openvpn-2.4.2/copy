@@ -1,0 +1,13 @@
+make $COPY_OPTS install
+
+install -d -m0750 -g 90 "$DST_DIR/$PKG_LONG_NAME"/etc/openvpn/{client,server}
+
+install -d -m0755 "$DST_DIR/$PKG_LONG_NAME"/usr/share/openvpn
+cp -r sample/sample-config-files "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/openvpn/examples
+
+for FILE in $(find contrib -type f); do
+  case "$(file --brief --mime-type "${FILE}")" in
+    "text/x-shellscript") install -D -m0755 "${FILE}" "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/openvpn/${FILE}" ;;
+    *) install -D -m0644 "${FILE}" "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/openvpn/${FILE}" ;;
+  esac
+done

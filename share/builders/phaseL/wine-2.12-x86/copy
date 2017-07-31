@@ -1,0 +1,6 @@
+ make prefix="$DST_DIR/$PKG_LONG_NAME/$WPREFIX" \
+      libdir="$DST_DIR/$PKG_LONG_NAME/$WPREFIX/lib$LIB_SUFFIX" \
+      mandir="$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man" \
+      dlldir="$DST_DIR/$PKG_LONG_NAME/$WPREFIX/lib$LIB_SUFFIX/wine" install
+
+rm -fr $DST_DIR/$PKG_LONG_NAME/$WPREFIX/share/applications

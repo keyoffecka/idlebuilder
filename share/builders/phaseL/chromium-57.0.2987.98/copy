@@ -18,7 +18,9 @@ if [ -f out/Release/natives_blob.bin ]; then
   cp -a out/Release/{natives_blob.bin,snapshot_blob.bin} $DST_DIR/$PKG_LONG_NAME/$CPREFIX
 fi
 
-cp -a out/Release/nacl_helper{,_bootstrap,_nonsfi} out/Release/nacl_irt_*.nexe $DST_DIR/$PKG_LONG_NAME/$CPREFIX
+if [ "$USE_NACL" = "true" ] ; then
+  cp -a out/Release/nacl_helper{,_bootstrap,_nonsfi} out/Release/nacl_irt_*.nexe $DST_DIR/$PKG_LONG_NAME/$CPREFIX
+fi
 cp -a out/Release/libwidevinecdmadapter.so out/Release/libclearkeycdm.so $DST_DIR/$PKG_LONG_NAME/$CPREFIX
 
 cp -a out/Release/locales $DST_DIR/$PKG_LONG_NAME/$CPREFIX

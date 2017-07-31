@@ -1,0 +1,5 @@
+make GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 $COPY_OPTS install
+
+install -m755 -d "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gconf/schemas"
+gconf-merge-schema "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gconf/schemas/gconf-editor.schemas" --domain gconf-editor "$DST_DIR/$PKG_LONG_NAME"/etc/gconf/schemas/*.schemas
+rm -f "$DST_DIR/$PKG_LONG_NAME"/etc/gconf/schemas/*.schemas
