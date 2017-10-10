@@ -1,0 +1,2 @@
+sed -i 's/==/>=/g' requirements.txt
+sed -i "s/, < .*',$/',/" setup.py

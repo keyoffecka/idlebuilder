@@ -1,0 +1,2 @@
+python setup.py install -O1 --root=$DST_DIR/$PKG_LONG_NAME
+install -Dm644 contrib/completion/bash/docker-compose $DST_DIR/$PKG_LONG_NAME/usr/share/bash-completion/completions/docker-compose
