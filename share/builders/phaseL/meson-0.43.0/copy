@@ -1,0 +1,4 @@
+python3 setup.py install --root="$DST_DIR/$PKG_LONG_NAME" --optimize=1 --skip-build
+install -Dm 644 syntax-highlighting/vim/ftdetect/meson.vim -t "$DST_DIR/$PKG_LONG_NAME/usr/share/vim/vimfiles/ftdetect"
+install -Dm 644 syntax-highlighting/vim/indent/meson.vim -t "$DST_DIR/$PKG_LONG_NAME/usr/share/vim/vimfiles/indent"
+install -Dm 644 syntax-highlighting/vim/syntax/meson.vim -t "$DST_DIR/$PKG_LONG_NAME/usr/share/vim/vimfiles/syntax"

@@ -1,0 +1,1 @@
+LDFLAGS+=" -I../include " make SHARED=1 no_test
