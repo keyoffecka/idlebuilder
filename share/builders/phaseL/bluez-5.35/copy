@@ -1,0 +1,9 @@
+make $COPY_OPTS install
+
+mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
+cp -a $DST_DIR/$PKG_LONG_NAME/etc/dbus-1 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
+rm -fr $DST_DIR/$PKG_LONG_NAME/etc
+cp -a $DST_DIR/$PKG_LONG_NAME/lib/udev/hid2hci $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+rm -fr $DST_DIR/$PKG_LONG_NAME/lib
+cp $DST_DIR/$PKG_LONG_NAME/$PREFIX/libexec/bluetooth/* $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
+rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/libexec

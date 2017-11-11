@@ -1,0 +1,5 @@
+make $COPY_OPTS install
+
+mkdir -p $DST_DIR/$PKG_LONG_NAME/etc/alsa
+cp -ra $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/alsa/alsa.conf.d $DST_DIR/$PKG_LONG_NAME/etc/alsa
+rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/alsa
