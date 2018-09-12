@@ -1,0 +1,4 @@
+make DESTDIR="$DST_DIR/$PKG_LONG_NAME" install
+make -C contrib/src DESTDIR="$DST_DIR/$PKG_LONG_NAME" install
+
+ln -fsv ../lib$LIB_SUFFIX/wx/config/gtk2-unicode-release-2.8 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/wx-config-2.8

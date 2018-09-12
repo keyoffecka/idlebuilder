@@ -1,0 +1,11 @@
+make DESTDIR="$DST_DIR/$PKG_LONG_NAME" install
+make DESTDIR="$DST_DIR/$PKG_LONG_NAME" install-man
+  
+install -dm755 "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/applications
+cp -aR "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/applnk/xdg/* "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/applications
+rm -rf "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/applnk
+  
+
+mkdir "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/icons/hicolor
+cd "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/share/icons
+find ./ -maxdepth 1 -mindepth 1 -type d -not -name hicolor -exec mv {} hicolor/ \;

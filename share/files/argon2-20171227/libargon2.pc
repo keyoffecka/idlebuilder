@@ -1,0 +1,11 @@
+prefix=@PREFIX@
+exec_prefix=${prefix}
+libdir=${prefix}/lib@LIB_SUFFIX@
+includedir=${prefix}/include
+
+Name: libargon2
+Description: Development libraries for libargon2
+Version: @PKG_VERSION@
+Libs: -L${libdir} -largon2 -lrt -ldl
+Cflags:
+URL: https://github.com/P-H-C/phc-winner-argon2

@@ -1,0 +1,1 @@
+make OPTTARGET=none LIBRARY_REL=lib$LIB_SUFFIX

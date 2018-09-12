@@ -1,0 +1,5 @@
+python waf configure --prefix=$PREFIX \
+                     --libdir=$PREFIX/lib$LIB_SUFFIX \
+                     --htmldir="$PREFIX/share/doc/$PKG_NAME/" \
+                     --freebob=no \
+                     --dbus

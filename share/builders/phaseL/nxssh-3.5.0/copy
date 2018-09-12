@@ -1,0 +1,2 @@
+install -dm755 ${DST_DIR}/$PKG_LONG_NAME/$PREFIX/bin
+install -D -m755 nxssh ${DST_DIR}/$PKG_LONG_NAME/$PREFIX/bin/nxssh
