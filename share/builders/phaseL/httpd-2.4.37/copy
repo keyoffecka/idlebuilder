@@ -1,0 +1,23 @@
+make $COPY_OPTS install
+
+ln -fs $PREFIX/lib$LIB_SUFFIX/httpd/modules "$DST_DIR/$PKG_LONG_NAME/etc/httpd/modules"
+
+# set sane defaults
+sed -e 's#/usr/lib$LIB_SUFFIX/httpd/modules/#modules/#' \
+    -e 's|#\(LoadModule negotiation_module \)|\1|' \
+    -e 's|#\(LoadModule include_module \)|\1|' \
+    -e 's|#\(LoadModule userdir_module \)|\1|' \
+    -e 's|#\(LoadModule slotmem_shm_module \)|\1|' \
+    -e 's|#\(Include conf/extra/httpd-multilang-errordoc.conf\)|\1|' \
+    -e 's|#\(Include conf/extra/httpd-autoindex.conf\)|\1|' \
+    -e 's|#\(Include conf/extra/httpd-languages.conf\)|\1|' \
+    -e 's|#\(Include conf/extra/httpd-userdir.conf\)|\1|' \
+    -e 's|#\(Include conf/extra/httpd-default.conf\)|\1|' \
+    -e 's|#\(Include conf/extra/httpd-mpm.conf\)|\1|' \
+    -i "$DST_DIR/$PKG_LONG_NAME/etc/httpd/conf/httpd.conf"
+
+# cleanup
+rm -r "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/httpd/manual"
+rm -r "$DST_DIR/$PKG_LONG_NAME/etc/httpd/conf/original"
+rm -r "$DST_DIR/$PKG_LONG_NAME/srv/"
+rm -r "$DST_DIR/$PKG_LONG_NAME/run"

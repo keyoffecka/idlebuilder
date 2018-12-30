@@ -1,0 +1,9 @@
+$PKG_SRC_DIR/scons/scons.py configure \
+    PREFIX="$PREFIX" \
+    PG_CONFIG="/opt/postgresql-11.1/bin/pg_config" \
+    INPUT_PLUGINS=all \
+    XMLPARSER=libxml2 \
+    LIBDIR_SCHEMA=lib64 \
+    DESTDIR="$DST_DIR/$PKG_LONG_NAME" \
+    CUSTOM_CXXFLAGS="$DEFAULT_CXXFLAGS" \
+    CUSTOM_LDFLAGS="$BUILD"

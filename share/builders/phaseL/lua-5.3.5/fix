@@ -1,0 +1,4 @@
+sed "s/%VER%/${PKG_VERSION%.*}/g;s/%REL%/$PKG_VERSION/g;s,/lib,/lib$LIB_SUFFIX,g;s,/man/,/share/man/,g" $WORKDIR/share/files/$PKG_LONG_NAME-$PKG_ARCH/lua.pc > lua.pc
+
+# Lua 5.3.4 has wrong release version in its Makefile. Fix it.
+sed "s/^R= \$V.4/R= \$V.5/" -i Makefile

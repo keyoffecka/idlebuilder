@@ -1,0 +1,2 @@
+mkdir -pv $DST_DIR/$PKG_LONG_NAME/usr
+cp -ar $PKG_SRC_DIR/include $DST_DIR/$PKG_LONG_NAME/usr
