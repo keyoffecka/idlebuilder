@@ -1,0 +1,10 @@
+make $COPY_OPTS install
+
+rm -fr "$DST_DIR/$PKG_LONG_NAME/usr/src"
+
+install -m 0664 -o 0 -g 40 -v $WORKDIR/share/files/$PKG_LONG_NAME/named.conf $DST_DIR/$PKG_LONG_NAME/etc/named.conf
+
+install -d -m770 -o 0 -g 40 "$DST_DIR/$PKG_LONG_NAME/var/named"
+install -m 0664 -o 0 -g 40 -v $WORKDIR/share/files/$PKG_LONG_NAME/localhost.zone $DST_DIR/$PKG_LONG_NAME/var/named/localhost.zone
+install -m 0664 -o 0 -g 40 -v $WORKDIR/share/files/$PKG_LONG_NAME/localhost.ip6.zone $DST_DIR/$PKG_LONG_NAME/var/named/localhost.ip6.zone
+install -m 0664 -o 0 -g 40 -v $WORKDIR/share/files/$PKG_LONG_NAME/127.0.0.zone $DST_DIR/$PKG_LONG_NAME/var/named/127.0.0.zone
