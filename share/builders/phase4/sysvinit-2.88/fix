@@ -1,1 +1,0 @@
-sed -i -e 's/\ sulogin[^ ]*//' -e 's/pidof\.8//' -e '/ln .*pidof/d' -e '/utmpdump/d' -e '/mountpoint/d' -e '/mesg/d' src/Makefile

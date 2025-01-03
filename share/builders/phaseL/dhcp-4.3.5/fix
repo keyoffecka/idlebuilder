@@ -1,1 +1,0 @@
-sed '/^CFLAGS="$CFLAGS/ s/INGS"/INGS -D_GNU_SOURCE"/' -i configure

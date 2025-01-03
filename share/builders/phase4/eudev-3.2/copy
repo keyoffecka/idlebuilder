@@ -1,4 +1,0 @@
-make $COPY_OPTS install
-
-install -dv $DST_DIR/$PKG_LONG_NAME/lib/firmware
-echo "# dummy, so that network is once again on eth*" > $DST_DIR/$PKG_LONG_NAME/etc/udev/rules.d/80-net-name-slot.rules

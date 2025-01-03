@@ -1,5 +1,0 @@
-cp -a $WORKDIR/share/files/$PKG_LONG_NAME/lib$PKG_NAME.pc $SRC_DIR/$PKG_LONG_NAME/lib$PKG_NAME.pc
-
-sed -i -e "s,@PKG_VERSION@,$PKG_VERSION,g" $SRC_DIR/$PKG_LONG_NAME/lib$PKG_NAME.pc
-sed -i -e "s,@PREFIX@,$PREFIX,g" $SRC_DIR/$PKG_LONG_NAME/lib$PKG_NAME.pc
-sed -i -e "s,@LIB_SUFFIX@,$LIB_SUFFIX,g" $SRC_DIR/$PKG_LONG_NAME/lib$PKG_NAME.pc

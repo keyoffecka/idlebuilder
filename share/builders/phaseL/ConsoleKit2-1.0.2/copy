@@ -1,5 +1,0 @@
-make $COPY_OPTS install
-
-mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/X11/app-defaults/xinitrc.d/90-consolekit{,.sh}
-
-install -v -m 0755 $WORKDIR/share/files/$PKG_LONG_NAME/pam-foreground-compat.ck $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/ConsoleKit/run-session.d/pam-foreground-compat.ck

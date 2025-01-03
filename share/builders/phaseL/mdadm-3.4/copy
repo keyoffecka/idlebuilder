@@ -1,4 +1,0 @@
-make INSTALL=/usr/bin/install BINDIR=$PREFIX/bin UDEVDIR=/etc/udev $COPY_OPTS install
-install -D -m755 mdassemble $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/mdassemble
-install -D -m644 mdadm.conf $DST_DIR/$PKG_LONG_NAME/etc/mdadm.conf
-rm -fr $DST_DIR/$PKG_LONG_NAME/etc/udev

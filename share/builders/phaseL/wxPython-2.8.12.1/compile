@@ -1,3 +1,0 @@
-make $COMPILE_OPTS
-make -C locale allmo
-make -C contrib/src

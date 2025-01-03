@@ -1,6 +1,0 @@
-make install $COPY_OPTS
-
-mkdir $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/$PKG_NAME
-mv -v $DST_DIR/$PKG_LONG_NAME/etc/udev/mtp-probe $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/$PKG_NAME/mtp-probe
-
-sed -i -e "s,/etc/udev/mtp-probe,$PREFIX/lib$LIB_SUFFIX/$PKG_NAME/mtp-probe,g" $DST_DIR/$PKG_LONG_NAME/etc/udev/rules.d/69-libmtp.rules

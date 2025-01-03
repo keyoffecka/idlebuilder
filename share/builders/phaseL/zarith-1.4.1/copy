@@ -1,2 +1,0 @@
-mkdir -p "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/ocaml"
-OCAMLFIND_LDCONF=ignore make install

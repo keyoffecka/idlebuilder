@@ -1,5 +1,0 @@
-install -Dm755 "bundles/latest/dynbinary-client/docker" "$DST_DIR/$PKG_LONG_NAME/$DPREFIX/docker"
-install -Dm755 "bundles/latest/dynbinary-daemon/dockerd" "$DST_DIR/$PKG_LONG_NAME/$DPREFIX/dockerd"
-install -Dm644 'contrib/completion/bash/docker' "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/bash-completion/completions/docker"
-install -Dm644 'contrib/syntax/vim/syntax/dockerfile.vim' "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/vim/vimfiles/syntax/dockerfile.vim"
-install -Dm644 'contrib/syntax/vim/ftdetect/dockerfile.vim' "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/vim/vimfiles/ftdetect/dockerfile.vim"

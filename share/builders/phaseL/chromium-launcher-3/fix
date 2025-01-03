@@ -1,3 +1,0 @@
-sed -r \
-    -e 's,\$\(PREFIX\)/bin,$(PREFIX),' \
-    -i Makefile

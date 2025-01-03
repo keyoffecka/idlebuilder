@@ -1,6 +1,0 @@
-mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/{bin,share/fb2-to-txt}
-sed -r \
-    -e "s,__prefix__,$PREFIX," \
-    $PKG_SRC_DIR/fb2-to-txt.sh > $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/fb2-to-txt.sh
-chmod 0775 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/fb2-to-txt.sh
-cp $PKG_SRC_DIR/fb2-to-txt.xsl $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/fb2-to-txt/fb2-to-txt.xsl

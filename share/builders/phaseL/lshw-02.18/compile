@@ -1,1 +1,0 @@
-make SBINDIR=$PREFIX/bin

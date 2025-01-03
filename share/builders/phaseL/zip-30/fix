@@ -1,2 +1,0 @@
-sed -e "/^CFLAGS_NOOPT =/s/\$/  -m$ARCH $DEFAULT_CFLAGS/" -i $SRC_DIR/$PKG_LONG_NAME/unix/Makefile
-sed -e "s/^LFLAGS1=''/LFLAGS1=-m$ARCH/" -i unix/configure

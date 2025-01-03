@@ -1,3 +1,0 @@
-make $COPY_OPTS install
-
-rm -frv $DST_DIR/$PKG_LONG_NAME/{etc,usr/lib}

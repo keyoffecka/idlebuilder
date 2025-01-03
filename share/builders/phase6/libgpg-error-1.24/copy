@@ -1,4 +1,0 @@
-make $COPY_OPTS install
-
-mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/gpg-error-config $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/gpg-error-config-$ARCH
-ln -sv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/gpg-error-config

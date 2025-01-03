@@ -1,2 +1,0 @@
-cd $PKG_SRC_DIR/..
-make $COPY_OPTS -f $PKG_SRC_DIR/Makefile.lfs install

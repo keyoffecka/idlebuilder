@@ -1,8 +1,0 @@
-make $COPY_OPTS install
-sed -i 's|#!/usr/bin/env python|#!/usr/bin/env python2|' "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/lib$LIB_SUFFIX/gimp/2.0/plug-ins/*.py
-install -D -m644 "linux.gpl" "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gimp/2.0/palettes/Linux.gpl"
-
-rm "$DST_DIR/$PKG_LONG_NAME/usr/share/man/man1/gimp-console.1"
-ln -s gimp-console-2.8.1.gz "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1/gimp-console.1.gz"
-ln -s gimptool-2.0 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/gimptool"
-ln -sf gimptool-2.0.1.gz "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1/gimptool.1.gz"

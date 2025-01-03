@@ -1,5 +1,0 @@
-make $COPY_OPTS install
-
-rm -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/{columns,autogen,getdefs,xml2ag}
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/autogen
-rm -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1/{columns,autogen,getdefs,xml2ag}.1

@@ -1,4 +1,0 @@
-make $COPY_OPTS install
-
-mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/pkgconfig $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib

@@ -1,1 +1,0 @@
-make prefix="$DST_DIR/$PKG_LONG_NAME/$PREFIX" libdir="$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX" install

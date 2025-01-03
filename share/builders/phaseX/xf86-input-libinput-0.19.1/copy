@@ -1,5 +1,0 @@
-make $COPY_OPTS install
-
-mkdir -pv $DST_DIR/$PKG_LONG_NAME/etc
-cp -rv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/X11 $DST_DIR/$PKG_LONG_NAME/etc
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/X11

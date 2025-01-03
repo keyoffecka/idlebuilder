@@ -1,3 +1,0 @@
- make
- make showdb showjournal showstat4 showwal sqldiff sqlite3_analyzer
- 

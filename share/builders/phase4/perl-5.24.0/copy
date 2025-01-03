@@ -1,7 +1,0 @@
-make $COPY_OPTS install
-
-mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/perl{,-$ARCH}
-mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/perl$PKG_VERSION{,-$ARCH}
-
-ln -sv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/perl
-ln -sv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/perl$PKG_VERSION

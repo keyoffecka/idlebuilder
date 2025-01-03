@@ -1,1 +1,0 @@
-python2 setup.py install --root="$DST_DIR/$PKG_LONG_NAME"

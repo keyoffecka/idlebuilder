@@ -1,1 +1,0 @@
-OCAMLFIND_DESTDIR="$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/ocaml" ocaml setup.ml -install

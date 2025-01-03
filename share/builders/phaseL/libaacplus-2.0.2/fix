@@ -1,6 +1,0 @@
-for i in $(find . -name 'Makefile.am'); do
-  sed 's|INCLUDES|AM_CPPFLAGS|g' -i $i;
-done
-
-sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' configure.ac
-

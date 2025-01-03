@@ -1,1 +1,0 @@
-make -f $PKG_SRC_DIR/unix/Makefile prefix="$DST_DIR/$PKG_LONG_NAME/$PREFIX"  MANDIR=$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1 install

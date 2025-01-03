@@ -1,2 +1,0 @@
-eval "$CFG_ENV $PKG_CFG_DIR/autogen.sh $CFG"
-touch src.downloaded

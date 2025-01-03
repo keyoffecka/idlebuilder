@@ -1,2 +1,0 @@
-sed -i 's#pkgdata#doc#' doc/doc.am 
-autoreconf -fi

@@ -1,3 +1,0 @@
-PYTHON_EXEC=`echo $PKG_LONG_NAME | sed -r 's,libxml2-(python[0-9.]+)-.+,\1,'`
-
-$PYTHON_EXEC setup.py build

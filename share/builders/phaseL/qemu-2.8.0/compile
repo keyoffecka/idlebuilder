@@ -1,2 +1,0 @@
-make config-all-devices.mak config-all-disas.mak
-make $COMPILE_OPTS

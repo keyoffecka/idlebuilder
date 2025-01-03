@@ -1,4 +1,0 @@
-make $COPY_OPTS install
-
-pushd $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
-ln -s libhunspell-?.?.so libhunspell.so

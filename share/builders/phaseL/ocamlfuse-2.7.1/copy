@@ -1,2 +1,0 @@
-install -dm 755 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/ocaml/Fuse"
-OCAMLFIND_DESTDIR="$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/ocaml" OCAMLFIND_INSTFLAGS="-ldconf $SRC_DIR/ld.conf" make install

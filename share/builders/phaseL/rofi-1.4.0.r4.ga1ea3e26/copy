@@ -1,2 +1,0 @@
-cd build
-DESTDIR="$DST_DIR/$PKG_LONG_NAME" ninja install

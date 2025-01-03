@@ -1,1 +1,0 @@
-sed -r -i -e 's,USE_CRYPTO=.*,USE_CRYPTO=no,' Makefile

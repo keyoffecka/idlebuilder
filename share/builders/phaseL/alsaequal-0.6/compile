@@ -1,1 +1,0 @@
-make $COPY_OPTS CC="gcc $DEFAULT_CFLAGS" LD="gcc $BUILD"

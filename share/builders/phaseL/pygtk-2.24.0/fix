@@ -1,1 +1,0 @@
-sed -i -e 's#env python$#env python2#' examples/pygtk-demo/{,demos/}*.py

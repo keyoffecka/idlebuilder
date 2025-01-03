@@ -1,5 +1,0 @@
-_old_ARCH=$ARCH
-unset ARCH
-make $COMPILE_OPTS
-ARCH=$_old_ARCH
-unset _old_ARCH

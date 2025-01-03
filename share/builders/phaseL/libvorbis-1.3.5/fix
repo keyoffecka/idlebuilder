@@ -1,1 +1,0 @@
-sed -i '/components.png \\/{n;d}' doc/Makefile.in

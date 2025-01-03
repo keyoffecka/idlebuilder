@@ -1,2 +1,0 @@
-echo "gl_cv_func_wcwidth_works=yes" > config.cache
-echo "ac_cv_func_fnmatch_gnu=yes" >> config.cache

@@ -1,5 +1,0 @@
-_old_arch=$ARCH
-unset ARCH
-$PKG_SRC_DIR/nvidia-installer $CFG
-ARCH=$_old_arch
-unset_old_arch

@@ -1,3 +1,0 @@
-rm -rf binaries
-sed -i 's/python/python2/g' Makefile
-mkdir binaries

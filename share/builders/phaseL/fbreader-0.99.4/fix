@@ -1,3 +1,0 @@
-sed -r \
-    -e 's,-DINSTALLDIR,-Wno-narrowing -DINSTALDIR,' \
-    -i makefiles/config.mk

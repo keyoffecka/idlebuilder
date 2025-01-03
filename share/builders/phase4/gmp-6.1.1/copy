@@ -1,4 +1,0 @@
-make $COPY_OPTS install
-
-mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/include/gmp{,-$ARCH}.h
-cp -v $WORKDIR/share/files/$PKG_LONG_NAME/gmp.h $DST_DIR/$PKG_LONG_NAME/$PREFIX/include

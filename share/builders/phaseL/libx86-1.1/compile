@@ -1,4 +1,0 @@
-_backend=
-[ "$ARCH" == "64" ] && _backend='BACKEND=x86emu'
-
-make $COMPILE_OPTS LIBDIR=$PREFIX/lib$LIB_SUFFIX $_backend

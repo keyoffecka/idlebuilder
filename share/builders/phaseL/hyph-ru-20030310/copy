@@ -1,9 +1,0 @@
-install -dm755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/hyphen
-install -m644 hyph_ru_RU.dic $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/hyphen/hyph_ru_RU.dic
-
-install -dm755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/myspell/dicts
-pushd $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/myspell/dicts
-  for file in $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/hyphen/*; do
-    ln -sv ../../hyphen/$(basename ${file}) .
-  done
-popd

@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ "$ARCH" == "32" ] ; then
-  /usr/bin/gcc -m32 $*
-else
-  /usr/bin/gcc -m64 $*
-fi

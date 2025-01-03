@@ -1,2 +1,0 @@
-make GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 $COPY_OPTS install
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/applications

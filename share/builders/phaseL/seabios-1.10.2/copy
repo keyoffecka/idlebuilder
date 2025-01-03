@@ -1,1 +1,0 @@
-install -Dm644 -t "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/qemu" binaries/*.bin

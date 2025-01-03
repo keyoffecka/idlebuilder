@@ -1,3 +1,0 @@
-sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg &&
-
-sed -r "s:.*(#.*SUBPIXEL_(RENDERING|HINTING 2)) .*:\1:g" -i include/freetype/config/ftoption.h

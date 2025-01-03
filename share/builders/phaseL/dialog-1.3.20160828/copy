@@ -1,2 +1,0 @@
-make $COPY_OPTS install-full
-chmod 0775 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libdialog.so.13.0.0

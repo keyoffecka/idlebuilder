@@ -1,1 +1,0 @@
-make CC="gcc $BUILD" LD="gcc $BUILD" $COMPILE_OPTS CFGL="-L./lib -ltirpc"

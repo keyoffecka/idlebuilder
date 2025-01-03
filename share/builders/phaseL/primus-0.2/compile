@@ -1,1 +1,0 @@
-CC=gcc\ $BUILD CXX=gcc\ $BUILD LIBDIR=lib$LIB_SUFFIX make

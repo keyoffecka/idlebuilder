@@ -1,2 +1,0 @@
-make $COPY_OPTS install
-install -m755 libglade-convert "$DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/"

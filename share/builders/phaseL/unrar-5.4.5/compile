@@ -1,1 +1,0 @@
-make $COMPILE_OPTS CXXFLAGS="${CXXFLAGS}" STRIP="true"

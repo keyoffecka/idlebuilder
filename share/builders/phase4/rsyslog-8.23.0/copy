@@ -1,4 +1,0 @@
-make $COPY_OPTS install
-
-install -dv $DST_DIR/$PKG_LONG_NAME/etc/rsyslog.d
-install -v -m640 $WORKDIR/share/files/$PKG_LONG_NAME/rsyslog.conf $DST_DIR/$PKG_LONG_NAME/etc

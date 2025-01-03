@@ -1,3 +1,0 @@
-sed -r \
-    -e '/misc/s,/lib/modules,$(DESTDIR)/lib/modules,' \
-    -i Makefile

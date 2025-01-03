@@ -1,3 +1,0 @@
-make PREFIX=$PREFIX \
-    DOC_PATH="\\\"$PREFIX/share/doc/smplayer\\\"" \
-    QMAKE_OPTS=DEFINES+=NO_DEBUG_ON_CONSOLE

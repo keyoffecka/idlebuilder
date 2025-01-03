@@ -1,6 +1,0 @@
-install -dm755 "$DST_DIR/$PKG_LONG_NAME"/usr/include/
-
-cd src
-for h in *.h; do
-  install -m 644 ${h} "$DST_DIR/$PKG_LONG_NAME"/usr/include/
-done

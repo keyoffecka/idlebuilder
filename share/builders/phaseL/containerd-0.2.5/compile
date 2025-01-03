@@ -1,2 +1,0 @@
-cd $PKG_WORK_DIR/src/github.com/docker/containerd
-LDFLAGS= make

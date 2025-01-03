@@ -1,6 +1,0 @@
-make DESTDIR="$DST_DIR/$PKG_LONG_NAME" install
-make -C contrib DESTDIR="$DST_DIR/$PKG_LONG_NAME" install
-make -C doc/src/sgml DESTDIR="$DST_DIR/$PKG_LONG_NAME" install-man
-
-mkdir -p $DST_DIR/$PKG_LONG_NAME/usr/lib$LIB_SUFFIX
-mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/pkgconfig $DST_DIR/$PKG_LONG_NAME/usr/lib$LIB_SUFFIX

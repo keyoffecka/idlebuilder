@@ -1,1 +1,0 @@
-eval "$CFG_ENV $PKG_CFG_DIR/Configure $CFG"

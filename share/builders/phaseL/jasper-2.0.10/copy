@@ -1,2 +1,0 @@
-make -C $PKG_BUILD_DIR $COPY_OPTS install
-make -C $PKG_SRC_DIR/build-shared $COPY_OPTS install

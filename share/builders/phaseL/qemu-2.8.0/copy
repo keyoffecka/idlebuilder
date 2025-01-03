@@ -1,7 +1,0 @@
-make $COPY_OPTS install
-
-rm -rf $DST_DIR/$PKG_LONG_NAME/var
-ln -s qemu-system-x86_64 $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/qemu-kvm
-chmod u+s $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/qemu/qemu-bridge-helper
-mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man $DST_DIR/$PKG_LONG_NAME/$PREFIX
-gzip -9 $DST_DIR/$PKG_LONG_NAME/$PREFIX/man/man?/*.?

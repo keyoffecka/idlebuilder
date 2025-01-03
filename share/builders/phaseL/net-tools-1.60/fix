@@ -1,2 +1,0 @@
-sed -i "s#/sbin#/bin#" Makefile
-sed -i "s#/usr##" man/Makefile

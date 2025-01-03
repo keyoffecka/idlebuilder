@@ -1,6 +1,0 @@
-eval "cmake $CMAKE_CFG -DJAS_ENABLE_SHARED=OFF $PKG_SRC_DIR"
-
-mkdir -pv $PKG_SRC_DIR/build-shared
-cd $PKG_SRC_DIR/build-shared
-
-eval "cmake $CMAKE_CFG -DJAS_ENABLE_SHARED=ON $PKG_SRC_DIR"

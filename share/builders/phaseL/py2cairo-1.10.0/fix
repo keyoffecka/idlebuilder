@@ -1,4 +1,0 @@
-sed -i 's:bin/env python:bin/env python2:' waf
-python2 ./waf --version
-pushd .waf-*
-popd

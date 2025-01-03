@@ -1,9 +1,0 @@
-make $COPY_OPTS install
-
-rm -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/autoopts-config
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/include
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/aclocal
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pkgconfig
-rm -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man1/autoopts-config.1
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man3

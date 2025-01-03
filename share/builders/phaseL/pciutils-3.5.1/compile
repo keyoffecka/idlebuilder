@@ -1,2 +1,0 @@
-_opts="-Wall -W -Wno-parentheses -Wstrict-prototypes -Wmissing-prototypes -fPIC -fvisibility=hidden"
-make $COMPILE_OPTS LDFLAGS="$BUILD" CFLAGS="$DEFAULT_CFLAGS $_opts" CXXFLAGS="$DEFAULT_CXXFLAGS $_opts" $COMPILE_OPTS PREFIX=$PREFIX LIBDIR=$PREFIX/lib$LIB_SUFFIX SHAREDIR=$PREFIX/share/hwdata SHARED=yes

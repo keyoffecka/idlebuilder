@@ -1,9 +1,0 @@
-make $COPY_OPTS rootbindir=$PREFIX/bin rootsbindir=$PREFIX/bin rootlibdir=$PREFIX/lib$LIB_SUFFIX install
-
-rm -fr $DST_DIR/$PKG_LONG_NAME/sbin
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/ntfs-3g
-
-ln -sv ntfs-3g "$DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/mount.ntfs"
-ln -sv mkntfs $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/mkfs.ntfs
-ln -sv lowntfs-3g $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/mount.lowntfs-3g
-ln -sv ntfs-3g $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/mount.ntfs-3g

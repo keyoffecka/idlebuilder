@@ -1,6 +1,0 @@
-make PREFIX=$DST_DIR/$PKG_LONG_NAME/$PREFIX install
-rm -frv $DST_DIR/$PKG_LONG_NAME/$PREFIX/man
-ln -svf bzdiff $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/bzcmp
-ln -svf bzgrep $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/bzegrep
-ln -svf bzgrep $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/bzfgrep
-ln -svf bzmore $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/bzless

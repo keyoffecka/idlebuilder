@@ -1,4 +1,0 @@
-make $COMPILE_OPTS
-
-cd $PKG_SRC_DIR/build-shared
-make $COMPILE_OPTS

@@ -1,1 +1,0 @@
-make prefix=$PREFIX DESTDIR="$DST_DIR/$PKG_LONG_NAME" install

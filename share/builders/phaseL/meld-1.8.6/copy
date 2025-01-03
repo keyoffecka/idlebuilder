@@ -1,1 +1,0 @@
-make prefix=$PREFIX libdir=$PREFIX/lib$LIB_SUFFIX $COPY_OPTS install

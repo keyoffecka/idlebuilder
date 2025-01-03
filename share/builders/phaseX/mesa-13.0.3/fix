@@ -1,3 +1,0 @@
-sed -i "/seems to be moved/s/^/: #/" bin/ltmain.sh
-
-autoreconf --force --verbose --install

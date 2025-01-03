@@ -1,2 +1,0 @@
-eval "PYTHON=/usr/bin/python2 $CFG_ENV ./waf configure $CFG"
-

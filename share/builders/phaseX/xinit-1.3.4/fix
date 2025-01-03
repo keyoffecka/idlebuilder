@@ -1,1 +1,0 @@
-sed -e '/$serverargs $vtarg/ s/serverargs/: #&/' -i startx.cpp

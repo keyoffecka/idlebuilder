@@ -1,7 +1,0 @@
-mkdir -p $DST_DIR/$PKG_LONG_NAME/usr/share/{pixmaps,$PKG_NAME/utils}
-install -m644 *.glade $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/$PKG_NAME
-install -m644 preferences_window.rb help_window.rb \
-              ruler_popup_menu.rb ruler_window.rb utils/*.rb \
-              $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/$PKG_NAME/utils
-install -Dm755 screenruler.rb $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/$PKG_NAME
-install -m644 $PKG_NAME-icon-*.png $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/pixmaps/

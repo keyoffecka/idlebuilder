@@ -1,5 +1,0 @@
-sed -r \
-  -e '/\$\(MAKE\) -C help install/d' \
-  -e '/\$\(update_mime_database\)/d' \
-  -e '/\$\(update_desktop_database\)/d' \
-  -i Makefile

@@ -1,2 +1,0 @@
-$WORKDIR/bin/make-ca.sh
-$WORKDIR/bin/remove-expired-certs.sh certs

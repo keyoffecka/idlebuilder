@@ -1,3 +1,0 @@
-sed -r \
-    -e 's,\$PYTHON -c "\$prog",echo "$prog",' \
-    -i configure

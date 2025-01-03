@@ -1,2 +1,0 @@
-make $COPY_OPTS install
-chmod   -v   755 $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/lib{hogweed,nettle}.so

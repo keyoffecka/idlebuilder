@@ -1,2 +1,0 @@
-make $COMPILE_OPTS
-make $COMPILE_OPTS training

@@ -1,5 +1,0 @@
-make $COPY_OPTS install
-
-rm -fr $DST_DIR/$PKG_LONG_NAME/lib
-
-install -Dm644 btrfs-completion "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/bash-completion/completions/btrfs"

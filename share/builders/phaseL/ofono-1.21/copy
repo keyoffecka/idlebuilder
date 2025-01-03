@@ -1,5 +1,0 @@
-make $COPY_OPTS install
-
-mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
-cp -r $DST_DIR/$PKG_LONG_NAME/etc/dbus-1 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share
-rm -fr $DST_DIR/$PKG_LONG_NAME/etc/dbus-1

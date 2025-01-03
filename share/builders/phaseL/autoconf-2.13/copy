@@ -1,3 +1,0 @@
-make prefix=$DST_DIR/$PKG_LONG_NAME/$PREFIX install
-
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share

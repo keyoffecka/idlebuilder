@@ -1,1 +1,0 @@
-python waf install --destdir="$DST_DIR/$PKG_LONG_NAME"

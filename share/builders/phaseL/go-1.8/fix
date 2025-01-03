@@ -1,2 +1,0 @@
-rm -fr $SRC_DIR/$PKG_LONG_NAME-bootstrap 2>/dev/null || true
-cp -a $PKG_SRC_DIR $SRC_DIR/$PKG_LONG_NAME-bootstrap

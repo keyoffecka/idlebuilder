@@ -1,2 +1,0 @@
-make $COMPILE_OPTS so
-make $COMPILE_OPTS

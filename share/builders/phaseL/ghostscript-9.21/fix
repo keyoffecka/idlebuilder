@@ -1,3 +1,0 @@
-rm -rfv cups/libs freetype ijs jbig2dec jpeg lcms2 libpng tiff zlib
-autoconf --force
-

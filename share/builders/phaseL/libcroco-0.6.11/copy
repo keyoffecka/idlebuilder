@@ -1,4 +1,0 @@
-make $COPY_OPTS install
-
-mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/croco-0.6-config $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/croco-0.6-config-$ARCH
-ln -sv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/croco-0.6-config

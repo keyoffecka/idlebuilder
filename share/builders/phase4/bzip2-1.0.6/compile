@@ -1,7 +1,0 @@
-make -f Makefile-libbz2_so CC="gcc ${BUILD}" CXX="g++ ${BUILD}" $COMPILE_OPTS
-
-make -f Makefile-libbz2_a $COMPILE_OPTS clean
-make -f Makefile-libbz2_a $COMPILE_OPTS CC="gcc ${BUILD}" CXX="g++ ${BUILD}"
-
-make $COMPILE_OPTS clean
-make $COMPILE_OPTS CC="gcc ${BUILD}" CXX="g++ ${BUILD}"

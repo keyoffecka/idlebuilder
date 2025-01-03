@@ -1,9 +1,0 @@
-install -d "$DST_DIR/$PKG_LONG_NAME/$PREFIX/bin" "$DST_DIR/$PKG_LONG_NAME/$GO_PREFIX"
-
-cp -a bin pkg src lib "$DST_DIR/$PKG_LONG_NAME/$GO_PREFIX"
-
-ln -sf $GO_PREFIX/bin/go "$DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/go"
-ln -sf $GO_PREFIX/bin/gofmt "$DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/gofmt"
-
-rm -rf "$DST_DIR/$PKG_LONG_NAME/$GO_PREFIX/pkg/bootstrap"
-rm -rf "$DST_DIR/$PKG_LONG_NAME/$GO_PREFIX/pkg/tool/*/api"

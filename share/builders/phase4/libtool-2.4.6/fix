@@ -1,1 +1,0 @@
-echo "lt_cv_sys_dlsearch_path='/lib$LIB_SUFFIX /usr/lib$LIB_SUFFIX'" > config.cache

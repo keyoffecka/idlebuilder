@@ -1,4 +1,0 @@
-install -d -m755 "$DST_DIR/$PKG_LONG_NAME"/$PREFIX/bin
-make $COPY_OPTS install
-mkdir -p "$DST_DIR/$PKG_LONG_NAME/$PREFIX/include/net"
-ln -s ../pcap-bpf.h $DST_DIR/$PKG_LONG_NAME/$PREFIX/include/net/bpf.h

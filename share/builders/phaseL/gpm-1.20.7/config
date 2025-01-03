@@ -1,2 +1,0 @@
-$PKG_SRC_DIR/autogen.sh
-eval "$CFG_ENV $PKG_SRC_DIR/configure $CFG"

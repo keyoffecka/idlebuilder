@@ -1,5 +1,0 @@
-mkdir -p $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/ocaml/{caml,camlidl}
-
-make DESTDIR=$DST_DIR/$PKG_LONG_NAME install
-
-install -Dm644 $WORKDIR/share/files/$PKG_LONG_NAME/META.camlidl $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/ocaml/camlidl/META

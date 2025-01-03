@@ -1,1 +1,0 @@
-sed -i "s|libs -o|libs -L/usr/lib$LIB_SUFFIX -Wl,-dynamic-linker=/lib64/ld-linux-x86-64.so.2 -o|" scripts/test-installation.pl

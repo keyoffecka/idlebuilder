@@ -1,4 +1,0 @@
-sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' $PKG_CFG_DIR/config/milestone.pl
-
-rm -r $PKG_CFG_DIR/editline
-rm -r $PKG_CFG_DIR/ctypes/libffi

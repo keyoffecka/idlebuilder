@@ -1,4 +1,0 @@
-make $COPY_OPTS install
-
-mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gdb/auto-load/usr/lib$LIB_SUFFIX
-mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/libguile-*-gdb.scm $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gdb/auto-load/usr/lib$LIB_SUFFIX

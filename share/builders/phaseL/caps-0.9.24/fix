@@ -1,3 +1,0 @@
-sed -r \
-    -e "s,/lib/ladspa,/lib$LIB_SUFFIX/ladspa," \
-    -i Makefile

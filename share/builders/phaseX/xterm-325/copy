@@ -1,5 +1,0 @@
-make $COPY_OPTS install
-make $COPY_OPTS install-ti
-
-mkdir -pv $DST_DIR/$PKG_LONG_NAME/$XPREFIX/share/X11/app-defaults
-cp -v $WORKDIR/share/files/$PKG_LONG_NAME/XTerm $DST_DIR/$PKG_LONG_NAME/$XPREFIX/share/X11/app-defaults

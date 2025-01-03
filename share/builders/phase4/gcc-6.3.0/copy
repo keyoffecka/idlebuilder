@@ -1,8 +1,0 @@
-make $COPY_OPTS install
-
-mkdir -p $DST_DIR/$PKG_LONG_NAME/lib
-ln -sv ../bin/cpp $DST_DIR/$PKG_LONG_NAME/lib/cpp
-
-mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gdb/auto-load/usr/lib{32,64}
-mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib32/libstdc++*gdb.py $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gdb/auto-load/usr/lib32
-mv -v $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib64/libstdc++*gdb.py $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gdb/auto-load/usr/lib64

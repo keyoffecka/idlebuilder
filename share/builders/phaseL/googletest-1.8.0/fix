@@ -1,1 +1,0 @@
-sed -r -i 's,DESTINATION lib\),DESTINATION lib'$LIB_SUFFIX'),' CMakeLists.txt

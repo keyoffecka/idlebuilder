@@ -1,1 +1,0 @@
-CC="gcc" CFLAGS="$DEFAULT_CFLAGS -I/usr/include/libnl3 " make $COMPILE_OPTS V=1

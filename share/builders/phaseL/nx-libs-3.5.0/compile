@@ -1,4 +1,0 @@
-make \
-    $COMPILE_OPTS \
-    PREFIX=$PREFIX \
-    CONFIGURE="./configure --prefix=$PREFIX --libdir=$PREFIX/lib$LIB_SUFFIX --libexecdir=$PREFIX/lib$LIB_SUFFIX --includedir=$PREFIX/include"

@@ -1,1 +1,0 @@
-sed -i "/seems to be moved/s/^/:#/" build-aux/ltmain.sh

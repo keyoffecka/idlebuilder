@@ -1,2 +1,0 @@
-make $COMPILE_OPTS mrproper
-make $COMPILE_OPTS ARCH=$PKG_ARCH headers_check

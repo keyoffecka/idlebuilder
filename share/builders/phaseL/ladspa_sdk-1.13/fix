@@ -1,4 +1,0 @@
-sed \
-    -e 's/mkdirhier/mkdir -p/' \
-    -e "s#-O3#${DEFAULT_CFLAGS} ${BUILD/,--as-needed/}#" \
-    -i $PKG_CFG_DIR/makefile

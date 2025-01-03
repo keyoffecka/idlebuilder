@@ -1,1 +1,0 @@
-sed -i 's:bin/env python:bin/env python2:' "example-clients/jack_control"

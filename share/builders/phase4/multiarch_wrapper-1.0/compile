@@ -1,1 +1,0 @@
-gcc ${BUILD} $PKG_SRC_DIR/multiarch_wrapper.c -o $PKG_BUILD_DIR/multiarch_wrapper

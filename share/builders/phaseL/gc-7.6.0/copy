@@ -1,6 +1,0 @@
-make $COPY_OPTS install
-
-install -dv -m775 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man3
-install -v -m644 doc/gc.man $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man3/gc_malloc.3
-
-ln -sfv gc_malloc.3 $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/man/man3/gc.3

@@ -1,6 +1,0 @@
-make $COPY_OPTS install
-
-ln -sv vim $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/vi
-
-mkdir -pv $DST_DIR/$PKG_LONG_NAME/etc
-cp $WORKDIR/share/files/$PKG_LONG_NAME/vimrc $DST_DIR/$PKG_LONG_NAME/etc

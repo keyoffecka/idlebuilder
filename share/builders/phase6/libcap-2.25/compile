@@ -1,2 +1,0 @@
-make CC="$CC" $COMPILE_OPTS prefix=$PREFIX lib=lib$LIB_SUFFIX
-make CC="$CC" $COMPILE_OPTS prefix=$PREFIX lib=lib$LIB_SUFFIX -C pam_cap

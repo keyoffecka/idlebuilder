@@ -1,8 +1,0 @@
-echo "#define OptimizedCDebugFlags ${CFLAGS} GccAliasingArgs" >>nx-X11/config/cf/host.def
-echo "#define OptimizedCplusplusDebugFlags ${CXXFLAGS} GccAliasingArgs" >>nx-X11/config/cf/host.def
-# Respect LDFLAGS
-echo "#define ExtraLoadFlags ${LDFLAGS}" >>nx-X11/config/cf/host.def
-echo "#define SharedLibraryLoadFlags -shared ${LDFLAGS}" >>nx-X11/config/cf/host.def
-
-sed -i "s:-o root -g root ::" nxcompshad/Makefile.in
-sed -i "s:gzip:#gzip:g" Makefile

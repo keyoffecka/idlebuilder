@@ -1,6 +1,0 @@
-make $COPY_OPTS install
-
-mv $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/nspr-config $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/nspr-config-$ARCH
-ln -sv multiarch_wrapper $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/nspr-config
-
-ln -s nspr.pc "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/pkgconfig/mozilla-nspr.pc"

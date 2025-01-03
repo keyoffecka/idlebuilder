@@ -1,4 +1,0 @@
-make $COPY_OPTS sbindir=/usr/bin install
-install -m755 contrib/idectl $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
-install -m755 contrib/ultrabayd $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin
-install -D -m 0755 wiper/wiper.sh $DST_DIR/$PKG_LONG_NAME/$PREFIX/bin/wiper.sh

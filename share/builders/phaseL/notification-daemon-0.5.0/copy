@@ -1,5 +1,0 @@
-make GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 $COPY_OPTS install
-
-install -d -m755 "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gconf/schemas"
-gconf-merge-schema "$DST_DIR/$PKG_LONG_NAME/$PREFIX/share/gconf/schemas/notification-daemon.schemas" --domain notification-daemon $DST_DIR/$PKG_LONG_NAME/etc/gconf/schemas/*.schemas
-rm -fr $DST_DIR/$PKG_LONG_NAME/etc

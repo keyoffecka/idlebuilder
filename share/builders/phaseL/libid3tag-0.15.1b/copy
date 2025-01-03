@@ -1,7 +1,0 @@
-make $COPY_OPTS install
-
-mkdir -pv $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/pkgconfig
-cat $WORKDIR/share/files/$PKG_LONG_NAME/id3tag.pc \
-| sed -r -e "s,__prefix__,$PREFIX," \
-         -e "s,__libdir__,$PREFIX/lib$LIB_SUFFIX," \
-> "$DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/pkgconfig/id3tag.pc"

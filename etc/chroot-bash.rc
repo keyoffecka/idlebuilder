@@ -1,9 +1,0 @@
-set +h
-set -e
-set -u
-
-source $WORKDIR/etc/phase$PHASE/phase.properties
-
-$WORKDIR/bin/chroot.sh
-
-exit

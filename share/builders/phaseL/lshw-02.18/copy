@@ -1,2 +1,0 @@
-make DESTDIR="$DST_DIR/$PKG_LONG_NAME"/ SBINDIR=$PREFIX/bin install
-rm -fv $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/lshw/{pci,usb}.ids

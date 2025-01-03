@@ -1,1 +1,0 @@
-eval "python2 $PKG_CFG_DIR/configure.py $CFG"

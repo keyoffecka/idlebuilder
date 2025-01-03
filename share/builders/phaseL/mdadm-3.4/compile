@@ -1,2 +1,0 @@
-make CXFLAGS="$DEFAULT_CFLAGS" BINDIR=$PREFIX/bin UDEVDIR=/etc/udev
-make MDASSEMBLE_AUTO=1 mdassemble

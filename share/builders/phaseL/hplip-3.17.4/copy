@@ -1,6 +1,0 @@
-make $COPY_OPTS install
-rm -fr $DST_DIR/$PKG_LONG_NAME/etc/udev
-rm -fr $DST_DIR/$PKG_LONG_NAME/etc/xdg
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/systemd
-cp -ra $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib/* $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib

@@ -1,3 +1,0 @@
-make PREFIX=/usr $COPY_OPTS install
-
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/applications

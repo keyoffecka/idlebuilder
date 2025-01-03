@@ -1,1 +1,0 @@
-cp $WORKDIR/share/files/$PKG_LONG_NAME/config $PKG_BUILD_DIR/.config

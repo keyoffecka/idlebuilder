@@ -1,2 +1,0 @@
-make $COPY_OPTS install
-make $COPY_OPTS install-libs

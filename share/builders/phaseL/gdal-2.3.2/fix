@@ -1,5 +1,0 @@
-# Fix build with poppler 0.71
-find frmts/pdf -type f | xargs sed -e 's|GBool|bool|g' -e 's|gFalse|false|g' -i
-
-# Fix mandir
-sed -i "s|^mandir=.*|mandir='\${prefix}/share/man'|" configure

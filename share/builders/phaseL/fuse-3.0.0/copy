@@ -1,7 +1,0 @@
-make $COPY_OPTS install
-
-install -Dm644 $WORKDIR/share/files/$PKG_LONG_NAME/fuse.conf $DST_DIR/$PKG_LONG_NAME/etc/fuse.conf
-
-rm -r $DST_DIR/$PKG_LONG_NAME/dev
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/lib$LIB_SUFFIX/udev
-rm -r $DST_DIR/$PKG_LONG_NAME/etc/init.d

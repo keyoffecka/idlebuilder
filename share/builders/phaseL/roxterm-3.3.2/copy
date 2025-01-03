@@ -1,1 +1,0 @@
-python $PKG_SRC_DIR/mscript.py install $CFG $COPY_OPTS

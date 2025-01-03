@@ -1,1 +1,0 @@
-make prefix=$PREFIX CFLAGS="${DEFAULT_CFLAGS}" LDFLAGS="-m${ARCH}"

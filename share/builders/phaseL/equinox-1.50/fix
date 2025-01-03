@@ -1,2 +1,0 @@
-sed -i "s/=\( EQUINOX_IS_TOOLBAR\)/= widget \&\&\1/" src/equinox_style.c
-sed -i "/gtimer/d" src/animation.c

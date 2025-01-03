@@ -1,2 +1,0 @@
-python setup.py install --root=$DST_DIR/$PKG_LONG_NAME
-rm -fr $DST_DIR/$PKG_LONG_NAME/$PREFIX/share/glib-2.0/schemas/*.compiled
